@@ -25,7 +25,7 @@ const Navbar = () => {
             ยินดีต้อนรับ ยังไม่ได้เข้าสู่ระบบ
           </span>
           <button className="hover:border-b-2 pb-[5px]">
-            <a href="/login"><p className="hover:text-red-500 text-lg">เข้าสู่ระบบ</p></a>
+            <a href="/login"><p className="hover:text-red-500 text-lg">เข้าสู่ระบบหรือลงทะเบียน</p></a>
           </button>
         </div>
       </div>
