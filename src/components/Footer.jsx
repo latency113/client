@@ -48,7 +48,7 @@ const Footer = () => {
 
           <div>
             <h1 className="text-lg mb-2 text-gray-300">รายการหลัก</h1>
-            <ul className="space-y-2 text-sm">
+            <ul className="nava space-y-3 text-sm">
               <li>
                 <a href="/news">ข่าวสารวงการเพลง</a>
               </li>
@@ -63,7 +63,7 @@ const Footer = () => {
 
           <div>
             <h1 className="text-lg mb-2 text-gray-300">เกี่ยวกับเรา</h1>
-            <ul className="space-y-2 text-sm">
+            <ul className="nava space-y-3 text-sm">
               <li>
                 <a href="#">เกี่ยวกับเรา</a>
               </li>
@@ -78,7 +78,7 @@ const Footer = () => {
 
           <div className="space-y-2">
             <h1 className="text-lg text-gray-300">ฝ่ายประชาสัมพันธ์</h1>
-            <div className="text-sm">
+            <div className="text-sm space-y-3">
               <p>Tel.090-000-0009</p>
               <p>Line: The Concert </p>
               <p>Mon-Sun : 8 A.M - 6 P.M</p>
