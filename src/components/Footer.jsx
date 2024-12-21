@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -50,13 +51,13 @@ const Footer = () => {
             <h1 className="text-lg mb-2 text-gray-300">รายการหลัก</h1>
             <ul className="nava space-y-3 text-sm">
               <li>
-                <a href="/news">ข่าวสารวงการเพลง</a>
+                <NavLink to="/news">ข่าวสารวงการเพลง</NavLink>
               </li>
               <li>
-                <a href="/concert">คอนเสิร์ตทั้งหมด</a>
+                <NavLink to="/concert">คอนเสิร์ตทั้งหมด</NavLink>
               </li>
               <li>
-                <a href="#">ภาพกิจกรรม</a>
+                <NavLink to="#">ภาพกิจกรรม</NavLink>
               </li>
             </ul>
           </div>
@@ -65,13 +66,13 @@ const Footer = () => {
             <h1 className="text-lg mb-2 text-gray-300">เกี่ยวกับเรา</h1>
             <ul className="nava space-y-3 text-sm">
               <li>
-                <a href="#">เกี่ยวกับเรา</a>
+                <NavLink to="#">เกี่ยวกับเรา</NavLink>
               </li>
               <li>
-                <a href="#">ข้อกำหนดการให้บริการ</a>
+                <NavLink to="#">ข้อกำหนดการให้บริการ</NavLink>
               </li>
               <li>
-                <a href="#">นโยบายความเป็นส่วนตัว</a>
+                <NavLink to="#">นโยบายความเป็นส่วนตัว</NavLink>
               </li>
             </ul>
           </div>

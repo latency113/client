@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -33,7 +34,7 @@ const Navbar = () => {
       <nav>
         <ul className="navb flex gap-10 justify-center">
           <li>
-            <a href="/" className="space-x-2">
+            <NavLink to="/" className="space-x-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -53,10 +54,10 @@ const Navbar = () => {
                 <rect x="2" y="8" width="20" height="13" rx="2" />
               </svg>
               <p>หน้าแรก</p>
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a href="/concert" className="space-x-2">
+            <NavLink to="/concert" className="space-x-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -76,10 +77,10 @@ const Navbar = () => {
                 <rect x="2" y="8" width="20" height="13" rx="2" />
               </svg>
               <p>คอนเสิร์ต</p>
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a href="/artist" className="space-x-2">
+            <NavLink to="/artist" className="space-x-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -99,10 +100,10 @@ const Navbar = () => {
                 <rect x="2" y="8" width="20" height="13" rx="2" />
               </svg>
              <p>ศิลปิน</p>
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a href="/products" className="space-x-2">
+            <NavLink to="/products" className="space-x-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -122,10 +123,10 @@ const Navbar = () => {
                 <rect x="2" y="8" width="20" height="13" rx="2" />
               </svg>
               <p>สินค้า</p>
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a href="/news" className="space-x-2">
+            <NavLink to="/news" className="space-x-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -145,7 +146,7 @@ const Navbar = () => {
                 <rect x="2" y="8" width="20" height="13" rx="2" />
               </svg>
               <p>ข่าวสาร</p>
-            </a>
+            </NavLink>
           </li>
         </ul>
       </nav>

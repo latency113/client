@@ -9,7 +9,7 @@ const Concert = () => {
         <Navbar />
         <div>
           <h1 className="text-white text-center text-4xl m-5">Concert</h1>
-          //carousel
+          {/* carousel */}
         </div>
       </div>
       <Footer />
