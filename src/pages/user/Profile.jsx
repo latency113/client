@@ -62,7 +62,7 @@ const Profile = () => {
           <div className="text-xl p-5">
             <div>
               <strong>โปรไฟล์:</strong>
-              <img src={data.user.pictureUrl} alt="Profile" className='rounded-full border-1 w-[350px]'/>
+              <img src={data.user.pictureUrl} alt="Profile" className='rounded-full border-1 w-[80px] h-[80px]'/>
             </div>
           <p><strong>ชื่อผู้ใช้:</strong> {data.user.name}</p>
           <p><strong>อีเมล:</strong> {data.user.email}</p>

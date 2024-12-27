@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Navbar = () => {
   const [name, setName] = useState(""); // เก็บชื่อผู้ใช้
   const [isLoggedIn, setIsLoggedIn] = useState(false); // เช็คว่าเข้าสู่ระบบแล้วหรือยัง
+  const [isAdmin, setIsAdmin] = useState(false); // เช็คว่าเป็น admin หรือไม่
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token"); // รับ token จาก localStorage
@@ -18,10 +20,14 @@ const Navbar = () => {
           Authorization: `Bearer ${token}`,
         },
       })
+
         .then((response) => response.json())
         .then((data) => {
           setName(data.user.name);
           setIsLoggedIn(true);
+          if (data.user.role === "admin") {
+            setIsAdmin(true); // ถ้าเป็น admin ให้ตั้งค่าเป็น true
+          }
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -29,12 +35,12 @@ const Navbar = () => {
         });
     }
   }, []);
-
+  
   const Logout = () => {
     localStorage.removeItem("token");
     toast.success("ออกจากระบบสำเร็จ");
     setTimeout(() => {
-      navigate("/");
+      navigate("/"); // ไปที่หน้าแรกหลังจากออกจากระบบ
     }, 1000);
   };
 
@@ -60,19 +66,25 @@ const Navbar = () => {
           <div className="flex space-x-3">
             {isLoggedIn ? (
               <>
-                <a href="/profile">
-                  <p className="hover:text-red-500 text-lg">โปรไฟล์</p>
-                </a>
+                <NavLink to="/profile" className="hover:text-red-500 text-lg">
+                  โปรไฟล์
+                </NavLink>
+                {isAdmin && (
+                  <NavLink
+                    to="/admin/dashboard"
+                    className="hover:text-red-500 text-lg"
+                  >
+                    Admin Dashboard
+                  </NavLink>
+                )}
                 <button className="hover:text-red-500 text-lg" onClick={Logout}>
                   ออกจากระบบ
                 </button>
               </>
             ) : (
-              <a href="/login">
-                <p className="hover:text-red-500 text-lg">
-                  เข้าสู่ระบบหรือลงทะเบียน
-                </p>
-              </a>
+              <NavLink to="/login" className="hover:text-red-500 text-lg">
+                เข้าสู่ระบบหรือลงทะเบียน
+              </NavLink>
             )}
           </div>
         </div>
@@ -89,10 +101,9 @@ const Navbar = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-tickets"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path d="m4.5 8 10.58-5.06a1 1 0 0 1 1.342.488L18.5 8" />
                 <path d="M6 10V8" />
@@ -112,10 +123,9 @@ const Navbar = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-tickets"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path d="m4.5 8 10.58-5.06a1 1 0 0 1 1.342.488L18.5 8" />
                 <path d="M6 10V8" />
@@ -135,10 +145,9 @@ const Navbar = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-tickets"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path d="m4.5 8 10.58-5.06a1 1 0 0 1 1.342.488L18.5 8" />
                 <path d="M6 10V8" />
@@ -158,10 +167,9 @@ const Navbar = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-tickets"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path d="m4.5 8 10.58-5.06a1 1 0 0 1 1.342.488L18.5 8" />
                 <path d="M6 10V8" />
@@ -181,10 +189,9 @@ const Navbar = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-tickets"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path d="m4.5 8 10.58-5.06a1 1 0 0 1 1.342.488L18.5 8" />
                 <path d="M6 10V8" />
