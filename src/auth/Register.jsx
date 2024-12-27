@@ -22,7 +22,7 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:4000/auth/register",);
+      const response = await axios.post("http://localhost:4000/api/register",);
       if (response.status == 201) {
         localStorage.setItem("token", response.data.token);
         toast.success("สมัครเป็นสมาชิกสำเร็จ!");

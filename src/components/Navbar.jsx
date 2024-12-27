@@ -1,16 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-// const Logout = () => {
-//   toast.success("ออกจากระบบสำเร็จ");
-//   setTimeout(() => {
-//     navigate("/login");
-//   }, 1500);
-// };
-
 const Navbar = () => {
+  const [name, setName] = useState(""); // เก็บชื่อผู้ใช้
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // เช็คว่าเข้าสู่ระบบแล้วหรือยัง
+
+  useEffect(() => {
+    const token = localStorage.getItem("token"); // รับ token จาก localStorage
+
+    if (token) {
+      // ถ้ามี token ให้ดึงข้อมูลผู้ใช้จาก API
+      fetch("http://localhost:4000/api/user/profile", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setName(data.user.name);
+          setIsLoggedIn(true);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          setIsLoggedIn(false);
+        });
+    }
+  }, []);
+
+  const Logout = () => {
+    localStorage.removeItem("token");
+    toast.success("ออกจากระบบสำเร็จ");
+    setTimeout(() => {
+      navigate("/");
+    }, 1000);
+  };
+
   return (
     <div className="text-white bg-blue-500 p-5">
       <div className="flex justify-between items-center">
@@ -21,13 +48,33 @@ const Navbar = () => {
           />
         </div>
 
-        <div className="space-x-5">
-          <span className="mr-4 text-lg">
-            ยินดีต้อนรับ ยังไม่ได้เข้าสู่ระบบ
-          </span>
-          <button className="hover:border-b-2 pb-[5px]">
-            <a href="/login"><p className="hover:text-red-500 text-lg">เข้าสู่ระบบหรือลงทะเบียน</p></a>
-          </button>
+        <div className="flex space-x-3">
+          {isLoggedIn ? (
+            <span className="flex gap-3 text-lg">
+              ยินดีต้อนรับ <p>{name}</p>
+            </span>
+          ) : (
+            <span className="text-lg">ยินดีต้อนรับ</span>
+          )}
+
+          <div className="flex space-x-3">
+            {isLoggedIn ? (
+              <>
+                <a href="/profile">
+                  <p className="hover:text-red-500 text-lg">โปรไฟล์</p>
+                </a>
+                <button className="hover:text-red-500 text-lg" onClick={Logout}>
+                  ออกจากระบบ
+                </button>
+              </>
+            ) : (
+              <a href="/login">
+                <p className="hover:text-red-500 text-lg">
+                  เข้าสู่ระบบหรือลงทะเบียน
+                </p>
+              </a>
+            )}
+          </div>
         </div>
       </div>
 
@@ -99,7 +146,7 @@ const Navbar = () => {
                 <path d="M6 19v2" />
                 <rect x="2" y="8" width="20" height="13" rx="2" />
               </svg>
-             <p>ศิลปิน</p>
+              <p>ศิลปิน</p>
             </NavLink>
           </li>
           <li>
