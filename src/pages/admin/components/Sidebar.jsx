@@ -24,7 +24,7 @@ const Sidebar = () => {
         </li>
         <li>
           <NavLink
-            to="/users"
+            to="/admin/users"
             className="block py-2 px-4 hover:bg-gray-700 rounded"
           >
             Manage Users
@@ -32,7 +32,7 @@ const Sidebar = () => {
         </li>
         <li>
           <NavLink
-            to="admin/dashboard/orders"
+            to="/admin/dashboard/orders"
             className="block py-2 px-4 hover:bg-gray-700 rounded"
           >
             Manage Orders
@@ -40,7 +40,7 @@ const Sidebar = () => {
         </li>
         <li>
           <NavLink
-            to="admin/dashboard/settings"
+            to="/admin/dashboard/settings"
             className="block py-2 px-4 hover:bg-gray-700 rounded"
           >
             Settings
@@ -51,7 +51,7 @@ const Sidebar = () => {
             to="/admin/add-concert"
             className="block py-2 px-4 hover:bg-gray-700 rounded"
           >
-            Add Concert
+            Manage Concert
           </NavLink>
         </li>
       </ul>
