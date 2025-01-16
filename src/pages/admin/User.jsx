@@ -100,7 +100,7 @@ const User = () => {
                 <tr key={user.id}>
                   <td className="border-b p-2">{user.name}</td>
                   <td className="border-b p-2">{user.email}</td>
-                  <td className="border-b p-2">{user.role}</td>
+                  <td className="border-b p-2">{user.role === 'admin' ? 'ผู้ดูแลระบบ' : 'ผู้ใช้งาน'}</td>
                   <td className="border-b p-2">
                     <button
                       onClick={() => {
@@ -128,7 +128,7 @@ const User = () => {
           <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
             <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
               <h3 className="text-2xl font-semibold mb-4">
-                Edit Role for {selectedUser.name}
+                Edit Role for <span className="text-red-500">{selectedUser.name}</span>
               </h3>
               <div>
                 <select
@@ -137,8 +137,8 @@ const User = () => {
                   className="border p-2 rounded w-full mb-4"
                 >
                   <option value="">Select Role</option>
-                  <option value="admin">Admin</option>
-                  <option value="user">User</option>
+                  <option value="admin">ผู้ดูแลระบบ</option>
+                  <option value="user">ผู้ใช้งาน</option>
                 </select>
               </div>
               <div className="flex justify-between">

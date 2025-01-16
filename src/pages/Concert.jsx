@@ -76,7 +76,7 @@ const ConcertCard = (props) => {
                   clip-rule="evenodd"
                 />
               </svg>
-              {props.venue}
+              <span>{props.venue}</span>
             </div>
 
             <div className="text-sm text-gray-600">
@@ -97,24 +97,8 @@ const ConcertCard = (props) => {
                       />
                     </svg>
                     <span>
-                      {new Date(s.date).toLocaleDateString()} |{" "}
-                      {s.startTime
-                        ? new Date(
-                            `1970-01-01T${s.startTime}`
-                          ).toLocaleTimeString([], {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })
-                        : "N/A"}{" "}
-                      -{" "}
-                      {s.endTime
-                        ? new Date(
-                            `1970-01-01T${s.endTime}`
-                          ).toLocaleTimeString([], {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })
-                        : "N/A"}
+                      {new Date(s.date).toLocaleDateString()} | {s.startTime} น.
+                      - {s.endTime} น.
                     </span>
                   </div>
                 ))

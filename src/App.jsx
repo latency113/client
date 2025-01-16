@@ -8,14 +8,14 @@ import Artist from "./pages/Artitst";
 import Product from "./pages/Product";
 import News from "./pages/News";
 import Profile from "./pages/user/Profile";
-import ConcertDetail from "./pages/concertDetail/concertDetail";
+import ConcertDetail from "./pages/concertPages/concertDetail";
 import Dashboard from "./pages/admin/Dashboard";
 import AddConcert from "./pages/admin/components/AddConcert";
 import User from "./pages/admin/User";
+import Booking from "./pages/user/Booking";
 import NotFound from "./pages/NotFound";
 import EditConcert from "./pages/admin/components/EditConcert";
-import ConcertBooking from "./pages/concertDetail/ConcertBooking";
-import AdminRoute from "./pages/admin/AdminRoute";
+import AdminRoute from "./pages/admin/components/AdminRoute";
 
 const App = () => {
   return (
@@ -30,7 +30,7 @@ const App = () => {
         <Route path="/news" element={<News />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/concert/:id" element={<ConcertDetail />} />
-        <Route path="/user/tickets" element={<ConcertBooking />} />
+        <Route path="/user/tickets" element={<Booking />} />
         <Route
           path="/admin/dashboard"
           element={
@@ -39,9 +39,30 @@ const App = () => {
             </AdminRoute>
           }
         />
-        <Route path="admin/add-concert" element={<AddConcert />} />
-        <Route path="admin/edit-concert/:id" element={<EditConcert />} />
-        <Route path="admin/users" element={<User />} />
+        <Route
+          path="admin/add-concert"
+          element={
+            <AdminRoute>
+              <AddConcert />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="admin/edit-concert/:id"
+          element={
+            <AdminRoute>
+              <EditConcert />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="admin/users"
+          element={
+            <AdminRoute>
+              <User />
+            </AdminRoute>
+          }
+        />
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </Router>

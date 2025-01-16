@@ -17,7 +17,7 @@ const Dashboard = () => {
       setConcerts(res.data.concerts);
       setLoading(false);
     } catch (error) {
-      setError("ไม่มีสิทธิ์");
+      setError("error");
       setLoading(false);
     }
   };
