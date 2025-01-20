@@ -8,14 +8,6 @@ const Sidebar = () => {
       <ul>
         <li>
           <NavLink
-            to="/"
-            className="block py-2 px-4 hover:bg-gray-700 rounded"
-          >
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
             to="/admin/dashboard"
             className="block py-2 px-4 hover:bg-gray-700 rounded"
           >
@@ -24,34 +16,18 @@ const Sidebar = () => {
         </li>
         <li>
           <NavLink
+            to="/admin/concert"
+            className="block py-2 px-4 hover:bg-gray-700 rounded"
+          >
+            Manage Concert
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
             to="/admin/users"
             className="block py-2 px-4 hover:bg-gray-700 rounded"
           >
             Manage Users
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/admin/dashboard/orders"
-            className="block py-2 px-4 hover:bg-gray-700 rounded"
-          >
-            Manage Orders
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/admin/dashboard/settings"
-            className="block py-2 px-4 hover:bg-gray-700 rounded"
-          >
-            Settings
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/admin/add-concert"
-            className="block py-2 px-4 hover:bg-gray-700 rounded"
-          >
-            Manage Concert
           </NavLink>
         </li>
       </ul>

@@ -10,7 +10,8 @@ import News from "./pages/News";
 import Profile from "./pages/user/Profile";
 import ConcertDetail from "./pages/concertPages/concertDetail";
 import Dashboard from "./pages/admin/Dashboard";
-import AddConcert from "./pages/admin/components/AddConcert";
+import AdminConcert from "./pages/admin/Concert";
+import AdminAddConcert from "./pages/admin/AddConcert";
 import User from "./pages/admin/User";
 import Booking from "./pages/user/Booking";
 import NotFound from "./pages/NotFound";
@@ -40,10 +41,10 @@ const App = () => {
           }
         />
         <Route
-          path="admin/add-concert"
+          path="admin/concert"
           element={
             <AdminRoute>
-              <AddConcert />
+              <AdminConcert />
             </AdminRoute>
           }
         />
@@ -60,6 +61,14 @@ const App = () => {
           element={
             <AdminRoute>
               <User />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="admin/add-concert"
+          element={
+            <AdminRoute>
+              <AdminAddConcert  />
             </AdminRoute>
           }
         />

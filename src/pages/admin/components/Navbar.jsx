@@ -17,7 +17,7 @@ const Navbar = () => {
   return (
     <div className="bg-gray-800 text-white text-center p-4 items-center">
       <div className="flex justify-between">
-        <h1 className="text-xl font-bold">Welcome Admin</h1>
+        <h1 className="text-xl font-bold ">{""}</h1>
         <div>
           <button
             onClick={Logout}
