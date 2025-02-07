@@ -11,7 +11,7 @@ import Profile from "./pages/user/Profile";
 import ConcertDetail from "./pages/concertPages/concertDetail";
 import Dashboard from "./pages/admin/Dashboard";
 import AdminConcert from "./pages/admin/Concert";
-import AdminAddConcert from "./pages/admin/AddConcert";
+import AdminAddConcert from "./pages/admin/components/AddConcert";
 import User from "./pages/admin/User";
 import Booking from "./pages/user/Booking";
 import NotFound from "./pages/NotFound";

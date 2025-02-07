@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
@@ -8,37 +8,64 @@ import "react-toastify/dist/ReactToastify.css";
 
 const EditConcert = () => {
   const { state } = useLocation();
-  const concert = state?.concert;
+  const { id: concertId } = useParams(); // ดึง id จาก URL
+  const navigate = useNavigate();
 
-  const [concertName, setConcertName] = useState(concert?.concertName || "");
-  const [venue, setVenue] = useState(concert?.venue || "");
-  const [price, setPrice] = useState(concert?.price || "");
-  const [seatsAvailable, setSeatsAvailable] = useState(
-    concert?.seatsAvailable || ""
-  );
-  const [schedules, setSchedules] = useState(concert?.schedules || []);
+  const [concertName, setConcertName] = useState("");
+  const [venue, setVenue] = useState("");
+  const [price, setPrice] = useState("");
+  const [seatsAvailable, setSeatsAvailable] = useState("");
+  const [schedules, setSchedules] = useState([]);
   const [picture, setPicture] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
 
-  // ฟังก์ชันจัดการการเลือกไฟล์
+  useEffect(() => {
+    // โหลดข้อมูลจาก state หรือดึงข้อมูลจาก API หาก state ไม่มีข้อมูล
+    if (state?.concert) {
+      const concert = state.concert;
+      setConcertName(concert.concertName || "");
+      setVenue(concert.venue || "");
+      setPrice(concert.price || "");
+      setSeatsAvailable(concert.seatsAvailable || "");
+      setSchedules(concert.schedules || []);
+    } else if (concertId) {
+      fetchConcertData();
+    }
+  }, [state, concertId]);
+
+  // ฟังก์ชันโหลดข้อมูลคอนเสิร์ตจาก API
+  const fetchConcertData = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:4000/api/concert/${concertId}`
+      );
+      const concert = res.data; // Backend Response
+      console.log("Fetched Concert:", concert); // Debug response
+
+      setConcertName(concert.concertName || "");
+      setVenue(concert.venue || "");
+      setPrice(concert.price || "");
+      setSeatsAvailable(concert.seatsAvailable || "");
+      setSchedules(concert.schedules || []);
+    } catch (err) {
+      console.error("Error fetching concert:", err); // Debug error
+      toast.error("ไม่สามารถโหลดข้อมูลคอนเสิร์ตได้");
+    }
+  };
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setPicture(file);
   };
 
-  // ฟังก์ชันเพิ่มรอบตารางเวลา
   const handleAddSchedule = () => {
     setSchedules([...schedules, { date: "", startTime: "", endTime: "" }]);
   };
 
-  // ฟังก์ชันลบรอบตารางเวลา
   const handleRemoveSchedule = (index) => {
     setSchedules(schedules.filter((_, i) => i !== index));
   };
 
-  // ฟังก์ชันจัดการการเปลี่ยนแปลงของตารางเวลา
   const handleScheduleChange = (index, field, value) => {
     const updatedSchedules = schedules.map((schedule, i) =>
       i === index ? { ...schedule, [field]: value } : schedule
@@ -46,7 +73,6 @@ const EditConcert = () => {
     setSchedules(updatedSchedules);
   };
 
-  // ฟังก์ชันส่งข้อมูลเมื่อกดบันทึก
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -60,22 +86,23 @@ const EditConcert = () => {
     if (picture) formData.append("picture", picture);
 
     try {
-      const res = await axios.put(
-        `http://localhost:4000/api/concert/${concert.id}`,
+      await axios.put(
+        `http://localhost:4000/api/concert/${concertId}`,
         formData,
-        { headers: { "Content-Type": "multipart/form-data" } }
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
       );
-      console.log("Response:", res); // log ผลลัพธ์จาก API
       toast.success("อัปเดตคอนเสิร์ตสำเร็จ");
-      setError(null);
+      navigate("/admin/concerts");
     } catch (err) {
-      console.log("Error:", err); // log ข้อผิดพลาด
       toast.error("เกิดข้อผิดพลาดในการอัปเดตคอนเสิร์ต");
-      setMessage("");
+    } finally {
+      setLoading(false);
     }
   };
 
-  if (!concert) {
+  if (!concertId && !state?.concert) {
     return <div>ไม่พบข้อมูลคอนเสิร์ต</div>;
   }
 

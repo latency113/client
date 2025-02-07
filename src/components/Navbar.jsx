@@ -43,7 +43,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="text-white bg-blue-500 p-5">
+    <div className="text-blue bg-white p-5">
       <div className="flex justify-between items-center">
         <div>
           <img
@@ -150,7 +150,7 @@ const Navbar = () => {
       </div>
 
       <nav>
-        <ul className="navb flex gap-10 justify-center">
+        <ul className="navb flex gap-10 justify-center bg-gray-100">
           <li>
             <NavLink to="/" className="space-x-2">
               <svg
@@ -163,6 +163,7 @@ const Navbar = () => {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                className="text-blue-500"
               >
                 <path d="m4.5 8 10.58-5.06a1 1 0 0 1 1.342.488L18.5 8" />
                 <path d="M6 10V8" />
@@ -170,7 +171,7 @@ const Navbar = () => {
                 <path d="M6 19v2" />
                 <rect x="2" y="8" width="20" height="13" rx="2" />
               </svg>
-              <p>หน้าแรก</p>
+              <p className="text-blue-500">หน้าแรก</p>
             </NavLink>
           </li>
           <li>
@@ -185,6 +186,7 @@ const Navbar = () => {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                className="text-blue-500"
               >
                 <path d="m4.5 8 10.58-5.06a1 1 0 0 1 1.342.488L18.5 8" />
                 <path d="M6 10V8" />
@@ -192,7 +194,7 @@ const Navbar = () => {
                 <path d="M6 19v2" />
                 <rect x="2" y="8" width="20" height="13" rx="2" />
               </svg>
-              <p>คอนเสิร์ต</p>
+              <p className="text-blue-500">คอนเสิร์ต</p>
             </NavLink>
           </li>
           <li>
@@ -207,6 +209,7 @@ const Navbar = () => {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                className="text-blue-500"
               >
                 <path d="m4.5 8 10.58-5.06a1 1 0 0 1 1.342.488L18.5 8" />
                 <path d="M6 10V8" />
@@ -214,7 +217,7 @@ const Navbar = () => {
                 <path d="M6 19v2" />
                 <rect x="2" y="8" width="20" height="13" rx="2" />
               </svg>
-              <p>ศิลปิน</p>
+              <p className="text-blue-500">ศิลปิน</p>
             </NavLink>
           </li>
           <li>
@@ -229,6 +232,7 @@ const Navbar = () => {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                className="text-blue-500"
               >
                 <path d="m4.5 8 10.58-5.06a1 1 0 0 1 1.342.488L18.5 8" />
                 <path d="M6 10V8" />
@@ -236,7 +240,7 @@ const Navbar = () => {
                 <path d="M6 19v2" />
                 <rect x="2" y="8" width="20" height="13" rx="2" />
               </svg>
-              <p>สินค้า</p>
+              <p className="text-blue-500">สินค้า</p>
             </NavLink>
           </li>
           <li>
@@ -251,6 +255,7 @@ const Navbar = () => {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                className="text-blue-500"
               >
                 <path d="m4.5 8 10.58-5.06a1 1 0 0 1 1.342.488L18.5 8" />
                 <path d="M6 10V8" />
@@ -258,7 +263,7 @@ const Navbar = () => {
                 <path d="M6 19v2" />
                 <rect x="2" y="8" width="20" height="13" rx="2" />
               </svg>
-              <p>ข่าวสาร</p>
+              <p className="text-blue-500">ข่าวสาร</p>
             </NavLink>
           </li>
         </ul>

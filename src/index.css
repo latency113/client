@@ -27,11 +27,16 @@ body{
         a{
             display: ruby;
             text-decoration: none;
-            color: white;
+            color: rgb(59 130 246);
             box-sizing: border-box;
         
             &:hover{
-                border-bottom: 2px solid white;
+                border-bottom: 2px solid rgb(59 130 246);
+                padding-bottom: 5px;
+            }
+
+            &.active {
+                border-bottom: 2px solid rgb(59 130 246);
                 padding-bottom: 5px;
             }
         }
@@ -43,11 +48,11 @@ body{
         a{
             display: ruby;
             text-decoration: none;
-            color: white;
+            color: rgb(59 130 246);
             box-sizing: border-box;
         
             &:hover{
-                border-bottom: 2px solid white;
+                border-bottom: 2px solid rgb(59 130 246);
             }
         }
     }

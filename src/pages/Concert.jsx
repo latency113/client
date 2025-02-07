@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { NavLink } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import concertService from "../services/Concert.service";
 
 const Concert = () => {
-  const [concerts, setConcerts] = useState([]);
-
-  const callApi = async () => {
-    try {
-      const res = await axios.get("http://localhost:4000/api/concerts");
-      console.log(res.data.concerts);
-      const data_format = res.data.concerts;
-      setConcerts(data_format);
-    } catch (error) {
-      console.error("Error fetching concerts:", error.message);
-    }
+  const [concert, setconcert] = useState([]);
+  const fetchconcert = () => {
+    concertService
+      .get()
+      .then((response) => {
+        setconcert(response.data.concerts);
+        console.log(response.data.concerts);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
-
   useEffect(() => {
-    callApi();
+    fetchconcert();
   }, []);
 
   return (
@@ -30,7 +29,7 @@ const Concert = () => {
           <h1 className="text-white text-center text-4xl m-5">Concert</h1>
           {/* corae */}
           <div className="grid grid-cols-3 gap-5 ">
-            {concerts.map((concert) => (
+            {concert.map((concert) => (
               <ConcertCard key={concert.id} {...concert} />
             ))}
           </div>

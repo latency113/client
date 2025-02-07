@@ -84,7 +84,7 @@ const AddConcert = () => {
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700">
-                ชื่อคอนเสิร์ต:
+                  ชื่อคอนเสิร์ต:
                 </label>
                 <input
                   type="text"
@@ -97,7 +97,7 @@ const AddConcert = () => {
 
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700">
-                สถานที่จัดคอนเสิร์ต:
+                  สถานที่จัดคอนเสิร์ต:
                 </label>
                 <input
                   type="text"
@@ -110,7 +110,7 @@ const AddConcert = () => {
 
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700">
-                ราคา:
+                  ราคา:
                 </label>
                 <input
                   type="number"
@@ -123,7 +123,7 @@ const AddConcert = () => {
 
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700">
-                จำนวนที่นั่งที่มี:
+                  จำนวนที่นั่งที่มี:
                 </label>
                 <input
                   type="number"
@@ -135,46 +135,47 @@ const AddConcert = () => {
               </div>
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700">
-                ตารางเวลา:
+                  ตารางเวลา:
                 </label>
-                {schedules.map((schedule, index) => (
-                  <div key={index} className="flex items-center gap-2 mb-2">
-                    <input
-                      type="date"
-                      value={schedule.date}
-                      onChange={(e) =>
-                        handleScheduleChange(index, "date", e.target.value)
-                      }
-                      className="w-1/3 px-2 py-1 border border-gray-300 rounded"
-                      required
-                    />
-                    <input
-                      type="time"
-                      value={schedule.startTime}
-                      onChange={(e) =>
-                        handleScheduleChange(index, "startTime", e.target.value)
-                      }
-                      className="w-1/4 px-2 py-1 border border-gray-300 rounded"
-                      required
-                    />
-                    <input
-                      type="time"
-                      value={schedule.endTime}
-                      onChange={(e) =>
-                        handleScheduleChange(index, "endTime", e.target.value)
-                      }
-                      className="w-1/4 px-2 py-1 border border-gray-300 rounded"
-                      required
-                    />
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveSchedule(index)}
-                      className="text-red-600 hover:underline"
-                    >
-                      ลบ
-                    </button>
-                  </div>
-                ))}
+                {Array.isArray(schedules) &&
+                  schedules.map((schedule, index) => (
+                    <div key={index} className="flex items-center gap-2 mb-2">
+                      <input
+                        type="date"
+                        value={schedule.date}
+                        onChange={(e) =>
+                          handleScheduleChange(index, "date", e.target.value)
+                        }
+                        className="w-1/3 px-2 py-1 border border-gray-300 rounded"
+                        required
+                      />
+                      <input
+                        type="time"
+                        value={schedule.startTime}
+                        onChange={(e) =>
+                          handleScheduleChange(index, "startTime", e.target.value)
+                        }
+                        className="w-1/4 px-2 py-1 border border-gray-300 rounded"
+                        required
+                      />
+                      <input
+                        type="time"
+                        value={schedule.endTime}
+                        onChange={(e) =>
+                          handleScheduleChange(index, "endTime", e.target.value)
+                        }
+                        className="w-1/4 px-2 py-1 border border-gray-300 rounded"
+                        required
+                      />
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveSchedule(index)}
+                        className="text-red-600 hover:underline"
+                      >
+                        ลบ
+                      </button>
+                    </div>
+                  ))}
                 <button
                   type="button"
                   onClick={handleAddSchedule}
@@ -185,7 +186,7 @@ const AddConcert = () => {
               </div>
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700">
-                รูปภาพคอนเสิร์ต:
+                  รูปภาพคอนเสิร์ต:
                 </label>
                 <input
                   type="file"
