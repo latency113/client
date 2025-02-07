@@ -14,7 +14,7 @@ const Footer = () => {
             <p className="mt-2">Follow Us</p>
             <div className="flex">
               <svg
-                class="w-10 h-10 text-white dark:text-white"
+                class="w-10 h-10 text-blue-500 dark:text-white"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -30,7 +30,7 @@ const Footer = () => {
                 />
               </svg>
               <svg
-                class="w-10 h-10 text-white dark:text-white"
+                class="w-10 h-10 text-blue-500 dark:text-white"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -48,7 +48,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h1 className="text-lg mb-2 text-gray-300">รายการหลัก</h1>
+            <h1 className="text-lg mb-2 text-blue-700">รายการหลัก</h1>
             <ul className="nava space-y-3 text-sm">
               <li>
                 <NavLink to="/news">ข่าวสารวงการเพลง</NavLink>
@@ -63,7 +63,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h1 className="text-lg mb-2 text-gray-300">เกี่ยวกับเรา</h1>
+            <h1 className="text-lg mb-2 text-blue-700">เกี่ยวกับเรา</h1>
             <ul className="nava space-y-3 text-sm">
               <li>
                 <NavLink to="#">เกี่ยวกับเรา</NavLink>
@@ -78,8 +78,8 @@ const Footer = () => {
           </div>
 
           <div className="space-y-2">
-            <h1 className="text-lg text-gray-300">ฝ่ายประชาสัมพันธ์</h1>
-            <div className="text-sm space-y-3">
+            <h1 className="text-lg text-blue-700">ฝ่ายประชาสัมพันธ์</h1>
+            <div className="text-sm space-y-3 text-blue-500">
               <p>Tel.090-000-0009</p>
               <p>Line: The Concert </p>
               <p>Mon-Sun : 8 A.M - 6 P.M</p>

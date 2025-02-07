@@ -43,7 +43,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="text-blue bg-white p-5">
+    <div className="text-blue bg-white p-5 shadow-md">
       <div className="flex justify-between items-center">
         <div>
           <img
@@ -150,7 +150,7 @@ const Navbar = () => {
       </div>
 
       <nav>
-        <ul className="navb flex gap-10 justify-center bg-gray-100">
+        <ul className="navb flex gap-10 justify-center bg-gray-100 rounded-full">
           <li>
             <NavLink to="/" className="space-x-2">
               <svg
