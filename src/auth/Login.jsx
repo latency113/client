@@ -36,8 +36,8 @@ const Login = () => {
   return (
     <>
     <Navbar/>
-      <div className="flex justify-center items-center h-screen bg-gradient-to-r from-slate-900 to-slate-800">
-        <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
+      <div className="flex justify-center items-center h-screen bg-gray-100">
+        <div className="w-full max-w-md p-8 bg-white rounded-2xl shadow-md">
           <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">
             เข้าสู่ระบบ
           </h2>
@@ -88,7 +88,7 @@ const Login = () => {
           <br />
           <a
             href="/register"
-            className="hover:text-blue-400 hover:border-b-2 border-gray-500"
+            className="hover:text-blue-500 hover:border-b-2 border-blue-500"
           >
             ยังไม่ได้เป็นสมาชิก
           </a>

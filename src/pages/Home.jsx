@@ -1,36 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 const Home = () => {
+  const fullText = "ssearch concert now!"; // ตรวจสอบข้อความให้ถูกต้อง
   const [animatedText, setAnimatedText] = useState("");
-  const fullText = "ค้นหาคอนเสิร์ตที่ต้องการได้เลย !";
+  const isMounted = useRef(true);
 
   useEffect(() => {
-    let index = 0;
-    setAnimatedText(""); // Reset text before animation starts
-    const interval = setInterval(() => {
-      if (index < fullText.length) {
-        setAnimatedText((prev) => prev + fullText[index]);
-        index++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 100);
+    isMounted.current = true;
+    setAnimatedText(""); // รีเซ็ตข้อความก่อนเริ่ม animation
 
-    return () => clearInterval(interval);
-  }, []); // Run effect only once
+    let index = 0;
+
+    const animateText = () => {
+      if (index < fullText.length && isMounted.current) {
+        setAnimatedText((prev) => prev + (fullText[index] || "")); // ป้องกัน undefined
+        index++;
+        setTimeout(animateText, 100);
+      }
+    };
+
+    setTimeout(animateText, 100);
+
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
   return (
     <>
-      <div className="min-h-screen bg-gray-100">
+      <div className="min-h-screen bg-gray-100 flex flex-col">
         <Navbar />
-        <div className="flex justify-center items-center flex-grow">
+        <div className="flex justify-center">
           <div className="bg-white p-8 mt-10 w-2/4 rounded-3xl shadow-2xl">
             <h1 className="text-blue-600 text-center text-3xl font-semibold mb-6">
-              {animatedText || " "}
+              {animatedText || "\u00A0"} {/* ป้องกันแสดง undefined */}
             </h1>
-            <form className="flex items-center gap-4 justify-center">
+            <form className="flex  gap-4 justify-center">
               <input
                 type="text"
                 placeholder="ค้นหา..."

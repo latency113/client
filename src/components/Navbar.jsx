@@ -54,11 +54,11 @@ const Navbar = () => {
 
         <div>
           {isLoggedIn ? (
-            <span className="flex gap-3 text-lg">
-              ยินดีต้อนรับ <p>{name}</p>
+            <span className="flex gap-3 text-lg text-blue-500">
+              ยินดีต้อนรับ <p className="text-red-700">{name}</p>
             </span>
           ) : (
-            <span className="text-lg">ยินดีต้อนรับ</span>
+            <span></span>
           )}
 
           <div className="flex justify-center space-x-3">
@@ -142,7 +142,7 @@ const Navbar = () => {
               </>
             ) : (
               <NavLink to="/login" className="hover:text-blue-900 text-lg">
-                เข้าสู่ระบบหรือลงทะเบียน
+                <button className="bg-blue-500 hover:bg-blue-600 p-2 mb-3 rounded-md text-white ">เข้าสู่ระบบ</button>
               </NavLink>
             )}
           </div>
