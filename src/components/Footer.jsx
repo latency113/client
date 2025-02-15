@@ -7,48 +7,44 @@ const Footer = () => {
       <div className="bg-white p-12 ">
         <div className="flex flex-col text-md md:flex-row md:justify-around items-center 4 font-semibold">
           <div>
-            <img
-              src="https://www.theconcert.com/assets/images/tcc-main-logo.svg"
-              alt="Logo"
-            />
+            <img src="/public/logo.png" alt="Logo" className="w-[150px]" />
             <p className="mt-2">Follow Us</p>
             <div className="flex">
               <svg
-                class="w-10 h-10 text-blue-500 dark:text-white"
-                aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
-                fill="none"
                 viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-facebook"
               >
-                <path
-                  fill="currentColor"
-                  fill-rule="evenodd"
-                  d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z"
-                  clip-rule="evenodd"
-                />
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
               </svg>
               <svg
-                class="w-10 h-10 text-blue-500 dark:text-white"
-                aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
-                fill="currentColor"
                 viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-instagram"
               >
-                <path
-                  fill-rule="evenodd"
-                  d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z"
-                  clip-rule="evenodd"
-                />
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
               </svg>
             </div>
           </div>
 
           <div>
-            <h1 className="text-lg mb-2 text-blue-700">รายการหลัก</h1>
+            <h1 className="text-lg mb-2 text-indigo-700">รายการหลัก</h1>
             <ul className="nava space-y-3 text-sm">
               <li>
                 <NavLink to="/news">ข่าวสารวงการเพลง</NavLink>
@@ -63,7 +59,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h1 className="text-lg mb-2 text-blue-700">เกี่ยวกับเรา</h1>
+            <h1 className="text-lg mb-2 text-indigo-700">เกี่ยวกับเรา</h1>
             <ul className="nava space-y-3 text-sm">
               <li>
                 <NavLink to="#">เกี่ยวกับเรา</NavLink>
@@ -78,8 +74,8 @@ const Footer = () => {
           </div>
 
           <div className="space-y-2">
-            <h1 className="text-lg text-blue-700">ฝ่ายประชาสัมพันธ์</h1>
-            <div className="text-sm space-y-3 text-blue-500">
+            <h1 className="text-lg text-indigo-700">ฝ่ายประชาสัมพันธ์</h1>
+            <div className="text-sm space-y-3 text-indigo-500">
               <p>Tel.090-000-0009</p>
               <p>Line: The Concert </p>
               <p>Mon-Sun : 8 A.M - 6 P.M</p>
@@ -87,7 +83,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="text-white text-center bg-blue-600">Copyright © 2024</div>
+      <div className="text-white text-center bg-indigo-600">Copyright © 2024</div>
     </>
   );
 };

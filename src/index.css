@@ -27,16 +27,16 @@ body{
         a{
             display: ruby;
             text-decoration: none;
-            color: rgb(59 130 246);
+            color: white;
             box-sizing: border-box;
         
             &:hover{
-                border-bottom: 2px solid rgb(59 130 246);
+                border-bottom: 2px solid white;
                 padding-bottom: 5px;
             }
 
             &.active {
-                border-bottom: 2px solid rgb(59 130 246);
+                border-bottom: 2px solid white;
                 padding-bottom: 5px;
             }
         }
@@ -57,3 +57,11 @@ body{
         }
     }
 }
+
+.bg-home {
+    background-image: url(/public/backgroundhome.jpg);
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+  }
+  

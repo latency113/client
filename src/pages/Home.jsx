@@ -1,55 +1,69 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
+import concertService from "../services/concert.service";
+
 const Home = () => {
-  const fullText = "ssearch concert now!"; // ตรวจสอบข้อความให้ถูกต้อง
-  const [animatedText, setAnimatedText] = useState("");
-  const isMounted = useRef(true);
+  const [concertList, setConcertList] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
+  // ฟังก์ชันดึงข้อมูลคอนเสิร์ต
+  const fetchConcert = (query = "") => {
+    concertService
+      .getQuery(query)
+      .then((response) => {
+        setConcertList(response.data.concerts);
+        console.log(response.data.concerts);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  // ใช้ useEffect โหลดข้อมูลเริ่มต้น
   useEffect(() => {
-    isMounted.current = true;
-    setAnimatedText(""); // รีเซ็ตข้อความก่อนเริ่ม animation
-
-    let index = 0;
-
-    const animateText = () => {
-      if (index < fullText.length && isMounted.current) {
-        setAnimatedText((prev) => prev + (fullText[index] || "")); // ป้องกัน undefined
-        index++;
-        setTimeout(animateText, 100);
-      }
-    };
-
-    setTimeout(animateText, 100);
-
-    return () => {
-      isMounted.current = false;
-    };
+    fetchConcert();
   }, []);
+
+  // ฟังก์ชันค้นหา
+  const handleSearch = (e) => {
+    e.preventDefault();
+    fetchConcert(searchQuery);
+    
+    // หลังจากค้นหาแล้วให้ไปยังหน้าใหม่ (ค้นหาผลลัพธ์)
+    navigate(`/search-results?query=${searchQuery}`); // เปลี่ยน URL และส่ง query ใน URL
+  };
 
   return (
     <>
-      <div className="min-h-screen bg-gray-100 flex flex-col">
+      <div className="min-h-screen bg-gray-100 flex flex-col mt-10">
         <Navbar />
-        <div className="flex justify-center">
-          <div className="bg-white p-8 mt-10 w-2/4 rounded-3xl shadow-2xl">
-            <h1 className="text-blue-600 text-center text-3xl font-semibold mb-6">
-              {animatedText || "\u00A0"} {/* ป้องกันแสดง undefined */}
-            </h1>
-            <form className="flex  gap-4 justify-center">
-              <input
-                type="text"
-                placeholder="ค้นหา..."
-                className="px-4 py-3 rounded-xl text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 w-3/5 transition transform hover:scale-105 duration-200"
-              />
-              <button
-                type="submit"
-                className="px-5 py-3 bg-blue-600 text-white font-semibold rounded-xl shadow-md hover:bg-blue-700 transition duration-200"
-              >
-                ค้นหา
-              </button>
-            </form>
+        <div className="bg-home relative">
+          {/* ส่วนซ้อนทับ (Overlay) */}
+          <div className="absolute inset-0 bg-black/50 flex justify-center items-center">
+            <div className="flex justify-center items-center">
+              <h1 className="text-white text-4xl">
+                ตามหาคอนเสิร์ตที่ต้องการได้เลย !
+              </h1>
+              <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-2 justify-center">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="ค้นหา..."
+                  className="px-4 py-3 rounded-l-xl text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-3/5 transition-transform hover:scale-105 duration-200"
+                />
+                <button
+                  type="submit"
+                  className="px-5 py-2 bg-indigo-600 text-white font-semibold rounded-r-xl shadow-md hover:bg-indigo-700 transition duration-200 w-full sm:w-auto"
+                >
+                  ค้นหา
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>

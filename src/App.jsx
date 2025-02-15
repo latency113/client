@@ -11,12 +11,12 @@ import Profile from "./pages/user/Profile";
 import ConcertDetail from "./pages/concertPages/concertDetail";
 import Dashboard from "./pages/admin/Dashboard";
 import AdminConcert from "./pages/admin/Concert";
-import AdminAddConcert from "./pages/admin/components/AddConcert";
 import User from "./pages/admin/User";
 import Booking from "./pages/user/Booking";
 import NotFound from "./pages/NotFound";
 import EditConcert from "./pages/admin/components/EditConcert";
 import AdminRoute from "./pages/admin/components/AdminRoute";
+import SearchResults from "./pages/SearchResults";
 
 const App = () => {
   return (
@@ -32,6 +32,7 @@ const App = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/concert/:id" element={<ConcertDetail />} />
         <Route path="/user/tickets" element={<Booking />} />
+        <Route path="/search-results" element={<SearchResults />} />
         <Route
           path="/admin/dashboard"
           element={
@@ -61,14 +62,6 @@ const App = () => {
           element={
             <AdminRoute>
               <User />
-            </AdminRoute>
-          }
-        />
-        <Route
-          path="admin/add-concert"
-          element={
-            <AdminRoute>
-              <AdminAddConcert  />
             </AdminRoute>
           }
         />

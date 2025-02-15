@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import concertService from "../services/Concert.service";
+import concertService from "../services/concert.service";
 
 const Concert = () => {
   const [concert, setconcert] = useState([]);
@@ -25,13 +25,15 @@ const Concert = () => {
     <>
       <div className="min-h-screen bg-gray-100">
         <Navbar />
-        <div>
-          <h1 className="text-blue-500 text-center text-4xl m-5">Concert</h1>
-          {/* corae */}
-          <div className="grid grid-cols-3 gap-5 ">
-            {concert.map((concert) => (
-              <ConcertCard key={concert.id} {...concert} />
-            ))}
+        <div className="container">
+          <div className="mt-[250px]">
+            <h1 className="text-blue-500 text-center text-4xl ">Concert</h1>
+            {/* corae */}
+            <div className="grid grid-cols-3 gap-5 ">
+              {concert.map((concert) => (
+                <ConcertCard key={concert.id} {...concert} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
