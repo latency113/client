@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="bg-white p-12 ">
         <div className="flex flex-col text-md md:flex-row md:justify-around items-center 4 font-semibold">
           <div>
-            <img src="/public/logo.png" alt="Logo" className="w-[150px]" />
+            <h1 className="text-2xl font-bold text-indigo-500">CONHUB</h1>
             <p className="mt-2">Follow Us</p>
             <div className="flex">
               <svg
@@ -83,7 +83,9 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="text-white text-center bg-indigo-600">Copyright © 2024</div>
+      <div className="text-white text-center bg-indigo-600">
+        Copyright © 2024
+      </div>
     </>
   );
 };
