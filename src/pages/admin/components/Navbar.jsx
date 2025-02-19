@@ -15,20 +15,42 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-gray-800 text-white text-center p-4 items-center">
-      <div className="flex justify-between">
-        <h1 className="text-xl font-bold ">{""}</h1>
-        <div>
-          <button
-            onClick={Logout}
-            className="text-white bg-blue-500 px-4 py-2 rounded hover:bg-blue-600"
-          >
-            ออกจากระบบ
-          </button>
+    <>
+      <div className="bg-gray-800 text-white p-4 flex justify-between items-center">
+        <div className="container">
+          <div className="flex justify-end">
+            {" "}
+            {/* Flexbox for layout */}
+            <h1 className="text-xl font-bold">
+              {" "}
+              {/* Removed empty string */}
+              {/* You can add your logo or title here if needed */}
+            </h1>
+            <div>
+              <button
+                onClick={Logout}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300" // Improved button styling
+              >
+                ออกจากระบบ
+              </button>
+            </div>
+            <ToastContainer
+              position="top-right"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />{" "}
+            {/* Toast Container customization */}
+          </div>
         </div>
       </div>
-      <ToastContainer />
-    </div>
+    </>
   );
 };
 

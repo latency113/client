@@ -13,25 +13,28 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      authService
-        .login({
-          email,
-          password,
-        })
-        .then((response) => {
-          if (response.data.token) {
-            localStorage.setItem("token", response.data.token);
-            toast.success("ล็อกอินสำเร็จ!");
-            setTimeout(() => {
-              navigate("/");
-            }, 500);
-          }
-        });
+        authService
+            .login({ email, password })
+            .then((response) => {
+                if (response && response.token) { // Corrected access
+                    localStorage.setItem("token", response.token);
+                    toast.success("ล็อกอินสำเร็จ!");
+                    setTimeout(() => {
+                        navigate("/");
+                    }, 500);
+                } else {
+                    toast.error("การล็อกอินล้มเหลว: ไม่พบโทเค็น");
+                }
+            })
+            .catch((error) => {
+                console.error("Login Error:", error);
+                toast.error("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
+            });
     } catch (err) {
-      toast.error("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
-      console.log(err);
+        console.error("handleSubmit Error:", err);
+        toast.error("เกิดข้อผิดพลาด");
     }
-  };
+};
 
   return (
     <>

@@ -54,13 +54,13 @@ const Home = () => {
       <ToastContainer /> 
       <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center mt-10">
         {/* ค้นหา */}
-          <div className="bg-white flex flex-col items-center py-10 px-5 w-3/4 md:w-2/4 shadow-lg">
+          <div className="bg-white flex flex-col items-center py-10 px-5 w-3/4 md:w-2/4 shadow-lg rounded-full">
             <h1 className="text-indigo-500 text-4xl mb-5 text-center">
               ตามหาคอนเสิร์ตที่ต้องการได้เลย !
             </h1>
             <form
               onSubmit={handleSearch}
-              className="flex flex-col sm:flex-row gap-2 justify-center w-full max-w-2xl"
+              className="flex flex-col sm:flex-row justify-center w-full max-w-2xl"
             >
               <input
                 type="text"

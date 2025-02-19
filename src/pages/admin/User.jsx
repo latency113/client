@@ -88,14 +88,14 @@ const User = () => {
           <h3 className="text-xl font-semibold mb-4">User List</h3>
           <table className="w-full border-collapse bg-white shadow-md rounded-lg">
             <thead>
-              <tr className="border-b bg-gray-100">
+              <tr className="border-b bg-gray-800 text-white">
                 <th className="p-2">Username</th>
                 <th className="p-2">Email</th>
                 <th className="p-2">Role</th>
                 <th className="p-2">Actions</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="">
               {users.map((user) => (
                 <tr key={user.id}>
                   <td className="border-b p-2">{user.name}</td>

@@ -10,7 +10,7 @@ import News from "./pages/News";
 import Profile from "./pages/user/Profile";
 import ConcertDetail from "./pages/concertPages/concertDetail";
 import Dashboard from "./pages/admin/Dashboard";
-import AdminConcert from "./pages/admin/Concert";
+import AdminConcert from "./pages/admin/concert/Concert";
 import User from "./pages/admin/User";
 import Booking from "./pages/user/Booking";
 import NotFound from "./pages/NotFound";
