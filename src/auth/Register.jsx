@@ -27,15 +27,15 @@ const Register = () => {
         name,
         phoneNumber,
       });
-      if (response.status === 201) {
-        localStorage.setItem("token", response.data.token);
+    
+      if (response) {
         toast.success("สมัครเป็นสมาชิกสำเร็จ!");
         setTimeout(() => navigate("/login"), 500);
       }
     } catch (err) {
-      toast.error("เกิดข้อผิดพลาดในการสมัครเป็นสมาชิก");
-      console.log(err);
+      toast.error(err.message); // แสดงข้อความจาก backend
     }
+    
   };
 
   return (
@@ -69,7 +69,7 @@ const Register = () => {
                   htmlFor="name"
                 ></label>
                 <input
-                  type="text"
+                  type="email"
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}

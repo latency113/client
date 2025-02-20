@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import axios from "axios";
+import AuthService from "../../../services/auth.service";
 
 const AdminRoute = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -12,23 +12,17 @@ const AdminRoute = ({ children }) => {
     const verifyAdmin = async () => {
       try {
         const token = localStorage.getItem("token");
-        console.log("Token:", token);
+        // console.log("Token:", token);
 
         if (!token) {
           throw new Error("Token not found");
         }
 
-        const res = await axios.post(
-          "http://localhost:4000/api/current-admin",
+        const res = await AuthService.AdminCheck(
           {},
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
         );
 
-        console.log("Response from API:", res.data.user.role);
+        // console.log("Response from API:", res.data.user.role);
 
         if (res.data.user.role === "admin") {
           setIsAdmin(true);
