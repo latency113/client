@@ -1,0 +1,40 @@
+/* login.css */
+
+/* การตั้งค่าพื้นฐานของ container */
+  
+  /* animation สำหรับหน้า login */
+  @keyframes slideInFromRight {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  /* animation สำหรับหน้า register */
+  @keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  /* ใส่ transition ให้ container */
+  .page {
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+  }
+  
+  /* เมื่อไปหน้า Login */
+  .login-page {
+    animation-name: slideInFromRight;
+  }
+  
+  /* เมื่อไปหน้า Register */
+  .register-page {
+    animation-name: slideInFromLeft;
+  }
+  

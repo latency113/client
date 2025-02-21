@@ -1,13 +1,50 @@
 import http from "../../http-common";
 
-const get = () => {
-  return http.get("/api/bookings");
+const getAllBookings = async () => {
+  try {
+    const response = await http.get("/api/bookings");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching all bookings:", error);
+    throw error;
+  }
 };
-const getById = (id) => {
-  return http.get(`/api/booking/user/${id}`);
+
+const getBookingByUserId = async (userId, token) => {
+  try {
+    if (!token) throw new Error("No token found");
+
+    const response = await http.get(`/api/booking/user/${userId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching bookings for user ${userId}:`, error);
+    throw error;
+  }
 };
+
+const getConcertById = async (concertId, token) => {
+  try {
+    if (!token) throw new Error("No token found");
+
+    const response = await http.get(`/api/concert/${concertId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching concert ${concertId}:`, error);
+    throw error;
+  }
+};
+
+
 const bookingService = {
-  get,getById,
+  getAllBookings,
+  getBookingByUserId,
+  getConcertById,
 };
 
 export default bookingService;

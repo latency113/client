@@ -4,8 +4,8 @@ const get = () => {
   return http.get("/api/users");
 };
 
-const getUserProfile = () => {
-  return http.get("/api/user/profile");
+const getUserProfile = (token) => {
+  return http.get("/api/user/profile",token);
 };
 
 const updateUserProfile = (data) => {

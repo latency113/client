@@ -4,38 +4,68 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Sidebar from "../../components/Sidebar";
 import bookingService from "../../services/booking.service";
+import { decodeToken } from "../../auth/auth";
 
 const ConcertBooking = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const token = localStorage.getItem("token");
-  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    // ตรวจสอบว่า userId และ token มีค่าหรือไม่
-    if (!userId || !token) {
-      console.error("ไม่พบ userId หรือ token ใน localStorage");
-      return;
-    }
-
-    const fetchConcert = async () => {
+    const fetchBookings = async () => {
       try {
-        const response = await bookingService.getById(userId, token);
-        console.log("ข้อมูลที่ได้รับจาก API:", response);
-        if (response && response.data && response.data.bookings) {
-          setBookings(response.data.bookings);
-        } else {
-          console.error("ไม่พบข้อมูลการจองใน API response");
+        if (!token) {
+          console.error("No token found");
+          setLoading(false);
+          return;
         }
+
+        const decodedPayload = decodeToken(token);
+        const userId = decodedPayload.id;
+        const { data } = await bookingService.getBookingByUserId(userId, token);
+        const bookingsData = data?.bookings || [];
+        const bookingsWithDetails = await Promise.all(
+          bookingsData.map(async (booking) => {
+            try {
+              const concertResponse = await bookingService.getConcertById(
+                booking.concertId,
+                token
+              );
+              if (
+                concertResponse &&
+                concertResponse.data &&
+                concertResponse.data.concert
+              ) {
+                return {
+                  ...booking,
+                  concertDetails: concertResponse.data.concert,
+                };
+              } else {
+                console.error(
+                  `Concert not found for booking ID: ${booking.id}`
+                );
+                return { ...booking, concertDetails: null };
+              }
+            } catch (error) {
+              console.error(
+                `Error fetching concert details for booking ID: ${booking.id}`,
+                error
+              );
+              return { ...booking, concertDetails: null };
+            }
+          })
+        );
+
+        setBookings(bookingsWithDetails);
       } catch (error) {
-        console.error("เกิดข้อผิดพลาดในการโหลดข้อมูล:", error);
+        console.error("Error fetching bookings:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchConcert();
-  }, [token, userId]);
+    fetchBookings();
+  }, [token]);
 
   if (loading) {
     return (
@@ -48,62 +78,57 @@ const ConcertBooking = () => {
   return (
     <>
       <Navbar />
-      <div className="bg-gray-100 min-h-screen pt-[70px]">
-        <div className="mt-[120px]">
-          <div className="flex justify-center gap-5 p-5">
-            <Sidebar />
-            <div className="max-w-4xl w-full bg-white shadow-lg rounded-lg overflow-hidden">
-              <h1 className="text-3xl font-bold text-gray-800 p-5 text-center">
-                บัตรของคุณ
-              </h1>
-              <div className="space-y-5">
-                {bookings.length > 0 ? (
-                  bookings.map((booking) => {
-                    const selectedSchedule =
-                      booking.concertDetails.Schedule.find(
-                        (schedule) => schedule.id === booking.scheduleId
-                      );
+      <div className="bg-gray-100 flex justify-center min-h-screen gap-5 p-5 mt-[150px]">
+        <Sidebar />
+        <div className="max-w-4xl w-full bg-white shadow-lg rounded-lg overflow-hidden">
+          <h1 className="text-3xl font-bold text-gray-800 p-5 text-center">
+            บัตรของคุณ
+          </h1>
+          <div className="space-y-5">
+            {bookings.length === 0 ? (
+              <p className="text-center text-xl text-gray-600">
+                ไม่พบข้อมูลการจอง
+              </p>
+            ) : (
+              bookings.map((booking) => {
+                const selectedSchedule = booking.concertDetails?.Schedule?.find(
+                  (schedule) => schedule.id === booking.scheduleId
+                );
 
-                    return (
-                      <div
-                        key={booking.id}
-                        className="p-5 border-b border-gray-300 last:border-none"
-                      >
-                        <h2 className="text-xl font-semibold text-gray-800">
-                          {booking.concertDetails.concertName}
-                        </h2>
-                        <p className="text-gray-600">
-                          {selectedSchedule
-                            ? `วันที่: ${moment(selectedSchedule.date).format(
-                                "DD/MM/YYYY"
-                              )}`
-                            : "ไม่พบข้อมูลรอบการแสดง"}
-                        </p>
-                        <p className="text-gray-600">
-                          สถานที่: {booking.concertDetails.venue}
-                        </p>
-                        <p className="text-gray-600">
-                          ราคา: {booking.concertDetails.price} บาท
-                        </p>
-
-                        {/* แสดง id ของการจอง หรือ id ของคอนเสิร์ต */}
-                        <p className="text-gray-500">
-                          การจอง ID: {booking.id} {/* แสดง id ของการจอง */}
-                        </p>
-                        <p className="text-gray-500">
-                          คอนเสิร์ต ID: {booking.concertDetails.id}{" "}
-                          {/* แสดง id ของคอนเสิร์ต */}
-                        </p>
-                      </div>
-                    );
-                  })
-                ) : (
-                  <p className="text-center text-xl text-gray-600">
-                    ไม่พบข้อมูลคอนเสิร์ต
-                  </p>
-                )}
-              </div>
-            </div>
+                return (
+                  <div
+                    key={booking.id}
+                    className="p-5 border-b border-gray-300 last:border-none"
+                  >
+                    <h2 className="text-xl font-semibold text-gray-800">
+                      {booking.concertDetails
+                        ? booking.concertDetails.concertName
+                        : "ไม่พบข้อมูลคอนเสิร์ต"}
+                    </h2>
+                    <p className="text-gray-600">
+                      {selectedSchedule
+                        ? `วันที่: ${moment(selectedSchedule.date).format(
+                            "DD/MM/YYYY"
+                          )}`
+                        : "ไม่พบข้อมูลรอบการแสดง"}
+                    </p>
+                    <p className="text-gray-600">
+                      สถานที่:{" "}
+                      {booking.concertDetails
+                        ? booking.concertDetails.venue
+                        : "ไม่ทราบ"}
+                    </p>
+                    <p className="text-gray-600">
+                      ราคา:{" "}
+                      {booking.concertDetails
+                        ? booking.concertDetails.price
+                        : "ไม่ทราบ"}{" "}
+                      บาท
+                    </p>
+                  </div>
+                );
+              })
+            )}
           </div>
         </div>
       </div>
