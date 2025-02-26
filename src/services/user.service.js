@@ -9,7 +9,7 @@ const getUserProfile = (token) => {
 };
 
 const updateUserProfile = (data) => {
-  return http.put("/api/user/profile", data);
+  return http.put("/api/user/profile/:id", data);
 };
 
 const updateRole = (id, role) => {

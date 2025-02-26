@@ -41,9 +41,9 @@ const Login = () => {
     <>
       <div className="">
         {/* หน้า login */}
-        <div className="flex justify-center items-center h-screen bg-gray-100">
-          <div className="flex">
-            <div className="bg-indigo-500 w-full max-w-lg p-8 shadow-lg flex items-center page login-page rounded-r-2xl">
+        <div className="flex justify-center items-center h-screen bg-white">
+          <div className="container mx-auto flex justify-center items-center">
+            <div className="bg-blue-500 w-full max-w-lg p-8 min-h-[70vh] flex items-center page login-page">
               <div className="text-white">
                 <div className="text-center mb-5">
                   <h1 className="text-3xl">Welcome to CONHUB :)</h1>
@@ -55,10 +55,9 @@ const Login = () => {
                     officia ipsum ipsam officiis neque cum.
                   </p>
                 </div>
-
                 <div className="flex items-end">
                   <NavLink to="/register">
-                    <button className="hover:border-2 p-1">
+                    <button className="w-full mt-3 text-md text-white py-2 px-4 text-center gap-1 border-transparent hover:border-white hover:border-2 hover:pb-[5px] active:text-white transition-all duration-200 rounded-lg">
                       ยังไม่ได้เป็นสมาชิก
                     </button>
                   </NavLink>
@@ -66,43 +65,45 @@ const Login = () => {
               </div>
             </div>
 
-            <div className="bg-white w-full max-w-lg p-8 shadow-md rounded-l-2xl">
-              <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">
-                เข้าสู่ระบบ
-              </h2>
-
-              <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    placeholder="อีเมล"
-                    className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg"
-                  />
-                </div>
-
-                <div className="mb-6">
-                  <input
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    placeholder="รหัสผ่าน"
-                    className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-indigo-500 text-white py-2 px-4 rounded-lg"
-                >
+            <div className="bg-white w-full max-w-lg p-8 min-h-[70vh] flex justify-center items-center">
+              <div className="container mx-auto">
+                <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">
                   เข้าสู่ระบบ
-                </button>
-              </form>
+                </h2>
+
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-4">
+                    <input
+                      type="email"
+                      id="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      placeholder="อีเมล"
+                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg"
+                    />
+                  </div>
+
+                  <div className="mb-6">
+                    <input
+                      type="password"
+                      id="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      placeholder="รหัสผ่าน"
+                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full mt-3 text-xl text-blue-500 py-2 px-4 text-center gap-1 border-transparent hover:border-blue-500 hover:border-2 hover:pb-[5px] active:text-blue-700 transition-all duration-200 rounded-lg"
+                  >
+                    เข้าสู่ระบบ
+                  </button>
+                </form>
+              </div>
               <ToastContainer />
             </div>
           </div>

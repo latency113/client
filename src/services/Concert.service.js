@@ -10,24 +10,18 @@ const get = async () => {
   }
 };
 
-const create = async (data) => {
+const create = async (formData) => {
   try {
     const token = localStorage.getItem("token");
+    if (!token) throw new Error("No token found");
 
-    if (!token) {
-      throw new Error("No token found");
-    }
-
-    const headers = {
-      // Define headers object first
-      Authorization: `Bearer ${token}`,
-    };
-
-    console.log("Headers in request:", headers); // Log the headers *before* the request
-
-    const response = await http.post("/api/concerts", data, {
-      headers: headers, // Use the defined headers object
+    const response = await http.post("/api/concerts", formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
     });
+
     return response.data;
   } catch (error) {
     console.error("Error creating concert:", error);
@@ -35,38 +29,33 @@ const create = async (data) => {
   }
 };
 
-const update = async (data, id) => {
+
+const update = async (formData, id) => {
   try {
     const token = localStorage.getItem("token");
+    if (!token) throw new Error("No token found");
 
-    if (!token) {
-      throw new Error("No token found");
-    }
 
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
 
-    const response = await http.put(`/api/concert/${id}`, data, {
-      headers: headers, // Do NOT set Content-Type here when using FormData
+    const response = await http.put(`/api/concert/${id}`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
     });
+
+    console.log("Concert updated response:", response); // เพิ่มบรรทัดนี้เพื่อตรวจสอบ response
 
     return response.data;
   } catch (error) {
-    console.error("Error update concert:", error);
-
+    console.error("Error updating concert:", error);
     if (error.response) {
-      console.error("Server responded with status:", error.response.status);
-      console.error("Server response data:", error.response.data);
-    } else if (error.request) {
-      console.error("No response received from server:", error.request);
-    } else {
-      console.error("Request setup error:", error.message);
+      console.error("Server responded with:", error.response.status, error.response.data);
     }
-
     throw error;
   }
 };
+
 
 const getQuery = (query) => {
   return http.get(`/api/concerts/query?query=${encodeURIComponent(query)}`); // No auth needed?

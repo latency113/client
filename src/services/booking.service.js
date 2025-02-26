@@ -10,36 +10,25 @@ const getAllBookings = async () => {
   }
 };
 
-const getBookingByUserId = async (userId, token) => {
+const getBookingByUserId = async (id) => {
   try {
-    if (!token) throw new Error("No token found");
-
-    const response = await http.get(`/api/booking/user/${userId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
+    const response = await http.get(`/api/booking/user/${id}`);
     return response.data;
   } catch (error) {
-    console.error(`Error fetching bookings for user ${userId}:`, error);
+    console.error(`Error fetching bookings for user ${id}:`, error);
     throw error;
   }
 };
 
-const getConcertById = async (concertId, token) => {
+const getConcertById = async (id) => {
   try {
-    if (!token) throw new Error("No token found");
-
-    const response = await http.get(`/api/concert/${concertId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
+    const response = await http.get(`/api/concert/${id}`);
     return response.data;
   } catch (error) {
-    console.error(`Error fetching concert ${concertId}:`, error);
+    console.error(`Error fetching concert ${id}:`, error);
     throw error;
   }
 };
-
 
 const bookingService = {
   getAllBookings,

@@ -42,89 +42,91 @@ const Register = () => {
     <>
       <div className="">
         {/* หน้า register */}
-        <div className="flex justify-center items-center h-screen bg-gray-100">
-          <div className="flex">
-            <div className="bg-white w-full max-w-lg p-8 shadow-md rounded-r-2xl">
-              <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">
-                สมัครสมาชิก
-              </h2>
-
-              <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    id="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                    placeholder="ชื่อ - นามสกุล"
-                    className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg"
-                  />
-                </div>
-
-                <div className="mb-4">
-                  <input
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    placeholder="อีเมล"
-                    className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg"
-                  />
-                </div>
-
-                <div className="mb-6">
-                  <input
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    placeholder="รหัสผ่าน"
-                    className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg"
-                  />
-                </div>
-
-                <div className="mb-6">
-                  <input
-                    type="password"
-                    id="confirmPassword"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    required
-                    placeholder="ยืนยันรหัสผ่าน"
-                    className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg"
-                  />
-                </div>
-
-                <div className="mb-6">
-                  <input
-                    type="text"
-                    id="phone"
-                    value={phoneNumber}
-                    maxLength="10"
-                    pattern="\d{10}"
-                    onChange={(e) =>
-                      setPhoneNumber(e.target.value.replace(/\D/, ""))
-                    }
-                    required
-                    placeholder="เบอร์โทรศัพท์"
-                    className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-yellow-500 text-white py-2 px-4 rounded-lg"
-                >
+        <div className="flex justify-center items-center h-screen bg-white">
+          <div className="container mx-auto flex justify-center items-center">
+            <div className="bg-white w-full max-w-lg p-8 min-h-[70vh] flex justify-center items-center">
+              <div className="container mx-auto">
+                <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">
                   สมัครสมาชิก
-                </button>
-              </form>
+                </h2>
+
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-4">
+                    <input
+                      type="text"
+                      id="name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
+                      placeholder="ชื่อ - นามสกุล"
+                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg"
+                    />
+                  </div>
+
+                  <div className="mb-4">
+                    <input
+                      type="email"
+                      id="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      placeholder="อีเมล"
+                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg"
+                    />
+                  </div>
+
+                  <div className="mb-6">
+                    <input
+                      type="password"
+                      id="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      placeholder="รหัสผ่าน"
+                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg"
+                    />
+                  </div>
+
+                  <div className="mb-6">
+                    <input
+                      type="password"
+                      id="confirmPassword"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      required
+                      placeholder="ยืนยันรหัสผ่าน"
+                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg"
+                    />
+                  </div>
+
+                  <div className="mb-6">
+                    <input
+                      type="text"
+                      id="phone"
+                      value={phoneNumber}
+                      maxLength="10"
+                      pattern="\d{10}"
+                      onChange={(e) =>
+                        setPhoneNumber(e.target.value.replace(/\D/, ""))
+                      }
+                      required
+                      placeholder="เบอร์โทรศัพท์"
+                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full mt-3 text-xl text-yellow-500 py-2 px-4 text-center gap-1 border-transparent hover:border-yellow-500 hover:border-2 hover:pb-[5px] active:text-yellow-700 transition-all duration-200 rounded-lg"
+                  >
+                    สมัครสมาชิก
+                  </button>
+                </form>
+              </div>
               <ToastContainer />
             </div>
 
-            <div className="bg-yellow-500 w-full max-w-lg p-8 shadow-lg flex items-center page register-page rounded-l-2xl">
+            <div className="bg-yellow-500 w-full max-w-lg p-8 flex items-center page register-page min-h-[70vh] justify-center">
               <div className="text-white">
                 <div className="text-center mb-5">
                   <h1 className="text-3xl font-bold">SignUp :)</h1>
@@ -139,7 +141,9 @@ const Register = () => {
 
                 <div className="flex items-end">
                   <NavLink to="/login">
-                    <button className="hover:border-2 p-1">เป็นสมาชิกแล้ว</button>
+                    <button className="w-full mt-3 text-md text-white py-2 px-4 text-center gap-1 border-transparent hover:border-white hover:border-2 hover:pb-[5px] active:text-white transition-all duration-200 rounded-lg">
+                      เป็นสมาชิกแล้ว
+                    </button>
                   </NavLink>
                 </div>
               </div>

@@ -12,33 +12,19 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  // ฟังก์ชันดึงข้อมูลคอนเสิร์ต
-  const fetchConcert = (query = "") => {
-    setIsLoading(true);
-    concertService
-      .getQuery(query)
-      .then((response) => {
-        setConcertList(response.data.concerts);
-      })
-      .catch((e) => {
-        console.error("เกิดข้อผิดพลาดในการโหลดข้อมูล:", e);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
-
-  // โหลดข้อมูลคอนเสิร์ตเมื่อเปิดหน้า
   useEffect(() => {
     fetchConcert();
   }, []);
 
-  // ล้างค่า searchQuery เมื่อออกจากหน้านี้
-  useEffect(() => {
-    return () => setSearchQuery("");
-  }, []);
+  const fetchConcert = () => {
+    setIsLoading(true);
+    concertService
+      .get()
+      .then((response) => setConcertList(response.data.concerts))
+      .catch((e) => console.error("เกิดข้อผิดพลาดในการโหลดข้อมูล:", e))
+      .finally(() => setIsLoading(false));
+  };
 
-  // ฟังก์ชันค้นหา
   const handleSearch = (e) => {
     e.preventDefault();
     if (!searchQuery.trim()) {
@@ -51,48 +37,56 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <ToastContainer /> 
-      <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center mt-10">
-        {/* ค้นหา */}
-          <div className="bg-white flex flex-col items-center py-10 px-5 w-3/4 md:w-2/4 shadow-lg rounded-full">
-            <h1 className="text-indigo-500 text-4xl mb-5 text-center">
-              ตามหาคอนเสิร์ตที่ต้องการได้เลย !
-            </h1>
-            <form
-              onSubmit={handleSearch}
-              className="flex flex-col sm:flex-row justify-center w-full max-w-2xl"
-            >
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="ค้นหา..."
-                className="px-4 py-3 rounded-l-xl text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-3/5 transition-transform hover:scale-105 duration-200"
-              />
-              <button
-                type="submit"
-                className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-r-xl shadow-md flex items-center justify-center gap-2 hover:bg-indigo-700 transition duration-200 w-full sm:w-auto"
-              >
-                <span>ค้นหา</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="lucide lucide-search"
-                >
-                  <circle cx="11" cy="11" r="8" />
-                  <path d="m21 21-4.3-4.3" />
-                </svg>
-              </button>
-            </form>
+      <ToastContainer />
+
+      {/* Banner Section */}
+      <div className="relative w-full h-96 bg-cover bg-center text-white flex items-center justify-center" style={{ backgroundImage: "url('/banner.jpg')" }}>
+        <div className="bg-black bg-opacity-50 p-8 rounded-lg text-center">
+          <h1 className="text-4xl font-bold">ค้นหาคอนเสิร์ตที่ใช่สำหรับคุณ</h1>
+          <p className="mt-2">พบกับศิลปินและคอนเสิร์ตที่คุณชื่นชอบ</p>
+          <form onSubmit={handleSearch} className="mt-4 flex">
+            <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="px-4 py-2 rounded-l-lg w-64 text-black" placeholder="ค้นหาคอนเสิร์ต..." />
+            <button type="submit" className="bg-indigo-600 px-4 py-2 text-white rounded-r-lg">ค้นหา</button>
+          </form>
+        </div>
+      </div>
+
+      {/* Upcoming Concerts */}
+      <div className="container mx-auto px-6 mt-10">
+        <h2 className="text-3xl font-semibold text-center mb-6">คอนเสิร์ตที่กำลังจะมา</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {concertList.map((concert) => (
+            <div key={concert.id} className="bg-white p-4 rounded-lg shadow-lg">
+              <img src={concert.pictureUrl} alt={concert.name} className="w-full h-48 object-cover rounded-lg" />
+              <h3 className="text-xl font-semibold mt-4">{concert.name}</h3>
+              <p className="text-gray-600">{concert.date}</p>
+              <button className="mt-4 bg-indigo-600 text-white px-4 py-2 rounded-lg">ดูรายละเอียด</button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Reviews */}
+      <div className="bg-gray-100 py-10 mt-10">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-semibold text-center mb-6">รีวิวจากผู้เข้าชม</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="bg-white p-4 rounded-lg shadow-lg">
+              <p className="text-gray-600">"สุดยอดคอนเสิร์ต สนุกมาก!"</p>
+              <p className="text-gray-800 font-bold mt-2">- คุณสมชาย</p>
+            </div>
+            <div className="bg-white p-4 rounded-lg shadow-lg">
+              <p className="text-gray-600">"เสียงดีมาก คุ้มค่าเงิน!"</p>
+              <p className="text-gray-800 font-bold mt-2">- คุณสมศรี</p>
+            </div>
+            <div className="bg-white p-4 rounded-lg shadow-lg">
+              <p className="text-gray-600">"จัดงานดีมาก ไฟ แสง สีสุดอลังการ"</p>
+              <p className="text-gray-800 font-bold mt-2">- คุณเอก</p>
+            </div>
           </div>
         </div>
+      </div>
+
       <Footer />
     </>
   );

@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="bg-white p-12 ">
         <div className="flex flex-col text-md md:flex-row md:justify-around items-center 4 font-semibold">
           <div>
-            <h1 className="text-2xl font-bold text-indigo-500">CONHUB</h1>
+            <h1 className="text-2xl font-bold text-blue-500">CONHUB</h1>
             <p className="mt-2">Follow Us</p>
             <div className="flex">
               <svg
@@ -44,7 +44,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h1 className="text-lg mb-2 text-indigo-700">รายการหลัก</h1>
+            <h1 className="text-lg mb-2 text-blue-700">รายการหลัก</h1>
             <ul className="nava space-y-3 text-sm">
               <li>
                 <NavLink to="/news">ข่าวสารวงการเพลง</NavLink>
@@ -59,7 +59,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h1 className="text-lg mb-2 text-indigo-700">เกี่ยวกับเรา</h1>
+            <h1 className="text-lg mb-2 text-blue-700">เกี่ยวกับเรา</h1>
             <ul className="nava space-y-3 text-sm">
               <li>
                 <NavLink to="#">เกี่ยวกับเรา</NavLink>
@@ -74,8 +74,8 @@ const Footer = () => {
           </div>
 
           <div className="space-y-2">
-            <h1 className="text-lg text-indigo-700">ฝ่ายประชาสัมพันธ์</h1>
-            <div className="text-sm space-y-3 text-indigo-500">
+            <h1 className="text-lg text-blue-700">ฝ่ายประชาสัมพันธ์</h1>
+            <div className="text-sm space-y-3 text-blue-500">
               <p>Tel.090-000-0009</p>
               <p>Line: The Concert </p>
               <p>Mon-Sun : 8 A.M - 6 P.M</p>
@@ -83,8 +83,8 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="text-white text-center bg-indigo-600">
-        Copyright © 2024
+      <div className="text-white text-center bg-gradient-to-r from-cyan-500 to-blue-500 py-2">
+        Copyright © Khan 
       </div>
     </>
   );

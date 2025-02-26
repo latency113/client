@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import "react-toastify/dist/ReactToastify.css";
 import AddConcertModal from "./AddConcertModal";
 import EditConcertModal from "./EditConcertModal";
@@ -13,9 +13,9 @@ const Concert = () => {
   const [concerts, setConcerts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false); 
-  const [selectedConcert, setSelectedConcert] = useState(null); 
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedConcert, setSelectedConcert] = useState(null);
 
   const navigate = useNavigate();
 
@@ -43,46 +43,61 @@ const Concert = () => {
     fetchConcerts();
   }, []);
 
+  // ฟังก์ชันเพื่อหาวันที่เริ่มต้นและวันสุดท้าย
+  const getConcertStartDate = (schedule) => {
+    if (schedule && schedule.length > 0) {
+      const startDate = new Date(
+        Math.min(...schedule.map((s) => new Date(s.date)))
+      );
+      return startDate.toLocaleDateString();
+    }
+    return "No schedule available";
+  };
+
+  const getConcertEndDate = (schedule) => {
+    if (schedule && schedule.length > 0) {
+      const endDate = new Date(
+        Math.max(...schedule.map((s) => new Date(s.date)))
+      );
+      return endDate.toLocaleDateString();
+    }
+    return "No schedule available";
+  };
+
   const handleDelete = async (id) => {
     Swal.fire({
-        title: 'ต้องการลบคอนเสิร์ตนี้ใช่มั้ย',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: 'red',
-        cancelButtonColor: 'gray',
-        confirmButtonText: 'ตกลง'
-    }).then(async (result) => { 
-        if (result.isConfirmed) {
-            try {
-                await concertService.remove(id);
-                setConcerts(concerts.filter((concert) => concert.id !== id));
-                Swal.fire(
-                    'Deleted!',
-                    'Your concert has been deleted.',
-                    'success'
-                );
-            } catch (err) {
-                console.error("Delete error:", err);
-                Swal.fire(
-                    'Error!',
-                    'เกิดข้อผิดพลาด: ' + err.message,
-                    'error'
-                );
-            }
+      title: "ต้องการลบคอนเสิร์ตนี้ใช่มั้ย",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "red",
+      cancelButtonColor: "gray",
+      confirmButtonText: "ตกลง",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await concertService.remove(id);
+          setConcerts(concerts.filter((concert) => concert.id !== id));
+          Swal.fire("Deleted!", "Your concert has been deleted.", "success");
+        } catch (err) {
+          console.error("Delete error:", err);
+          Swal.fire("Error!", "เกิดข้อผิดพลาด: " + err.message, "error");
         }
+      }
     });
-};
-
+  };
 
   const handleEditClick = (concert) => {
-    console.log("Concert data:", concert);
     setSelectedConcert(concert);
     setIsEditModalOpen(true);
   };
 
   const handleCloseEditModal = () => {
     setIsEditModalOpen(false);
-    setSelectedConcert(null); 
+    setSelectedConcert(null);
+  };
+
+  const handleCloseAddModal = () => {
+    setIsAddModalOpen(false);
   };
 
   if (loading)
@@ -104,10 +119,27 @@ const Concert = () => {
                 All Concerts
               </h3>
               <button
-                onClick={() => setIsModalOpen(true)}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                onClick={() => setIsAddModalOpen(true)}
+                className="mt-3 text-xl text-blue-500 py-2 px-4 text-center gap-1 rounded-lg border-transparent hover:border-blue-500 hover:border-b-2 hover:pb-[5px] transition-all duration-200"
               >
-                Add Concert
+                <p className="flex items-center gap-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-arrow-right"
+                  >
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                  </svg>
+                  เพิ่มคอนเสิร์ต
+                </p>
               </button>
             </div>
             <div className="overflow-x-auto">
@@ -119,10 +151,11 @@ const Concert = () => {
                 <table className="w-full text-left border-collapse">
                   <thead>
                     <tr className="border-b bg-gray-100 text-gray-700">
-                      <th className="p-3">Concert Name</th>
-                      <th className="p-3">Date</th>
-                      <th className="p-3">Venue</th>
-                      <th className="p-3">Seats Available</th>
+                      <th className="p-3">ชื่อคอนเสอร์ต</th>
+                      <th className="p-3">วันแรก</th>
+                      <th className="p-3">วันสุดท้าย</th>
+                      <th className="p-3">สถานี</th>
+                      <th className="p-3">จำนวนบัตร</th>
                       <th className="p-3">Actions</th>
                     </tr>
                   </thead>
@@ -134,26 +167,25 @@ const Concert = () => {
                       >
                         <td className="p-3">{concert.concertName}</td>
                         <td className="p-3">
-                          {concert.Schedule.length > 0
-                            ? new Date(
-                                concert.Schedule[0].date
-                              ).toLocaleDateString()
-                            : "No schedule available"}
+                          {getConcertStartDate(concert.Schedule)}
+                        </td>
+                        <td className="p-3">
+                          {getConcertEndDate(concert.Schedule)}
                         </td>
                         <td className="p-3">{concert.venue}</td>
                         <td className="p-3">{concert.seatsAvailable}</td>
                         <td className="p-3 flex gap-2">
                           <button
-                            onClick={() => handleEditClick(concert)} // เรียกฟังก์ชัน handleEditClick
-                            className="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
+                            onClick={() => handleEditClick(concert)}
+                            className="mt-3 text-xl text-yellow-500 py-2 px-4 text-center gap-1 border-transparent rounded-lg hover:border-yellow-500 hover:border-b-2 hover:pb-[5px] transition-all duration-200"
                           >
-                            Edit
+                            แก้ไข
                           </button>
                           <button
                             onClick={() => handleDelete(concert.id)}
-                            className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+                            className="mt-3 text-xl text-red-500 py-2 px-4 text-center gap-1 border-transparent rounded-lg hover:border-red-500 hover:border-b-2 hover:pb-[5px] transition-all duration-200"
                           >
-                            Delete
+                            ลบ
                           </button>
                         </td>
                       </tr>
@@ -170,10 +202,7 @@ const Concert = () => {
         onClose={handleCloseEditModal}
         concert={selectedConcert}
       />
-      <AddConcertModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
+      <AddConcertModal isOpen={isAddModalOpen} onClose={handleCloseAddModal} />
       <ToastContainer />
     </div>
   );
