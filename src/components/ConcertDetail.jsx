@@ -10,7 +10,6 @@ import bookingService from "../services/booking.service";
 const ConcertDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,25 +17,6 @@ const ConcertDetail = () => {
   const [userId, setUserId] = useState(null);
   const [selectedSchedule, setSelectedSchedule] = useState(null);
 
-  useEffect(() => {
-    // ดึง token และ decode หา userId
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      toast.error("กรุณาเข้าสู่ระบบก่อนทำการจอง");
-      navigate("/login");
-    } else {
-      try {
-        const base64Payload = token.split(".")[1];
-        const decodedPayload = JSON.parse(atob(base64Payload)); // ใช้ atob เพื่อแปลง Base64 เป็น string
-        setUserId(decodedPayload.id); // ดึง id จาก Payload
-      } catch (error) {
-        console.error("Error decoding token:", error);
-        toast.error("Token ไม่ถูกต้อง, กรุณาเข้าสู่ระบบอีกครั้ง");
-        navigate("/login");
-      }
-    }
-  }, [navigate]);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen); // เปลี่ยนสถานะการเปิด/ปิด Modal
