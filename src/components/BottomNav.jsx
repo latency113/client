@@ -17,12 +17,12 @@ const BottomNav = () => {
           <div className="flex justify-around py-3 ">
             {/* ข่าวสาร */}
             <NavLink
-              to="/news"
+              to="/about"
               className="flex flex-col items-center text-blue-500 hover:text-blue-700"
               activeClassName="text-red-500"
             >
               <FiFileText size={24} />
-              <span className="text-xs mt-1">ข่าวสาร</span>
+              <span className="text-xs mt-1">เกี่ยวกับ</span>
             </NavLink>
 
             <NavLink
