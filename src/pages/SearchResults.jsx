@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, NavLink } from "react-router-dom";
-import concertService from "../services/concert.service";
+import concertService from "../services/Concert.service";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { debounce } from "lodash";
