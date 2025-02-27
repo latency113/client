@@ -33,7 +33,6 @@ const getConcertById = async (id) => {
 const createBooking = async (bookingData, token) => {
   try {
     const response = await http.post(
-      "https://concert-production.up.railway.app/", // Your backend API endpoint
       bookingData, // Send booking data in the body
       {
         headers: {
