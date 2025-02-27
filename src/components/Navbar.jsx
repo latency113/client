@@ -116,7 +116,7 @@ const Navbar = () => {
                       </li>
                       <li>
                         <NavLink
-                          to="/news"
+                          to="/about"
                           className="flex items-center space-x-2"
                         >
                           <svg
