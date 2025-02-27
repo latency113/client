@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import UserService from "./../../services/user.service";
-import ConService from "../../services/concert.service";
+import ConService from "../../services/Concert.service";
 
 const Dashboard = () => {
   const [concertCount, setConcertCount] = useState(0);
