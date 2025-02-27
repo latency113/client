@@ -1,5 +1,6 @@
 import React from "react";
 import { FaReact, FaNodeJs } from "react-icons/fa"; // React and Node.js icons
+import { FaInfoCircle } from "react-icons/fa"; // Import icons
 import { SiRailway } from "react-icons/si"; // Railway icon from react-icons
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
