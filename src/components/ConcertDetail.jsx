@@ -21,7 +21,7 @@ const ConcertDetail = () => {
     setIsModalOpen(!isModalOpen); // เปลี่ยนสถานะการเปิด/ปิด Modal
   };
 
-  const callApi = async () => {
+  const callApi = async (id) => {
     try {
       const res = await axios.get(`https://concert-production.up.railway.app/api/concert${id}`);
       setData(res.data.concert);
