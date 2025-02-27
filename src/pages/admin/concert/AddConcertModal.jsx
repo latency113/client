@@ -7,7 +7,7 @@ const AddConcertModal = ({ isOpen, onClose }) => {
   const [concertName, setConcertName] = useState("");
   const [venue, setVenue] = useState("");
   const [price, setPrice] = useState("");
-  const [brand, setBrand] = useState(null); // เปลี่ยนจาก brands เป็น brand
+  const [brand, setBrand] = useState(""); // เปลี่ยนจาก brands เป็น brand
   const [brands, setBrands] = useState([]); // State to hold the list of brands
   const [seatsAvailable, setSeatsAvailable] = useState("");
   const [picture, setPicture] = useState(null);
