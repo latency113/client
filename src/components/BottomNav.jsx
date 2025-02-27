@@ -2,11 +2,12 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import {
   FiHome,
-  FiShoppingBag,
   FiFileText,
   FiUser,
   FiTag,
 } from "react-icons/fi"; // ใช้ React Icons
+import { IoTicketOutline } from "react-icons/io5";
+
 
 const BottomNav = () => {
   return (
@@ -22,6 +23,15 @@ const BottomNav = () => {
             >
               <FiFileText size={24} />
               <span className="text-xs mt-1">ข่าวสาร</span>
+            </NavLink>
+
+            <NavLink
+              to="/concert"
+              className="flex flex-col items-center text-blue-500 hover:text-blue-700"
+              activeClassName="text-red-500"
+            >
+              <IoTicketOutline  size={24} />
+              <span className="text-xs mt-1">ซื้อตั๋วเลย</span>
             </NavLink>
 
 
