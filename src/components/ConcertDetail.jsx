@@ -39,11 +39,6 @@ const ConcertDetail = () => {
   }, [navigate]);
 
   const toggleModal = () => {
-    if (!userId) {
-      toast.error("กรุณาเข้าสู่ระบบก่อนทำการจอง");
-      navigate("/login");
-      return;
-    }
     setIsModalOpen(!isModalOpen); // เปลี่ยนสถานะการเปิด/ปิด Modal
   };
 
