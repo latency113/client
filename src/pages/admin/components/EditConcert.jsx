@@ -37,7 +37,7 @@ const EditConcert = () => {
   const fetchConcertData = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:4000/api/concert/${concertId}`
+        `https://concert-production.up.railway.app/api/concert/${concertId}`
       );
       const concert = res.data; // Backend Response
       console.log("Fetched Concert:", concert); // Debug response
@@ -87,7 +87,7 @@ const EditConcert = () => {
 
     try {
       await axios.put(
-        `http://localhost:4000/api/concert/${concertId}`,
+        `https://concert-production.up.railway.app/api/concert/${concertId}`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
