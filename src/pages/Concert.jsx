@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import concertService from "../services/concert.service";
+import concertService from "../services/Concert.service";
 import ConcertCard from "../components/ConcertCard";
 import BottomNav from "../components/BottomNav";
 
