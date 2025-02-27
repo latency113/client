@@ -68,7 +68,7 @@ const ConcertDetail = () => {
     }
   
     const schedule = data.Schedule.find(
-      (schedule) => schedule.id === parseInt(selectedSchedule)
+      (schedule) => schedule.id === selectedSchedule
     );
   
     if (!schedule) {
@@ -96,7 +96,7 @@ const ConcertDetail = () => {
       const bookingData = {
         concertId: id,
         totalTickets,
-        scheduleId: parseInt(selectedSchedule),
+        scheduleId: selectedSchedule,
       };
   
       console.log("Booking Data: ", bookingData);
