@@ -122,29 +122,39 @@ const Register = () => {
                     สมัครสมาชิก
                   </button>
                 </form>
+                <NavLink to="/login">
+                  <button className="md:hidden w-full mt-3 text-sm text-yellow-700 py-2 px-4 text-center gap-1 border-transparent hover:border-yellow-700 hover:border-2 hover:pb-[5px] transition-all duration-200 rounded-lg">
+                    เป็นสมาชิกแล้ว
+                  </button>
+                </NavLink>
               </div>
               <ToastContainer />
             </div>
 
-            <div className="bg-yellow-500 w-full max-w-lg p-8 flex items-center page register-page min-h-[70vh] justify-center">
-              <div className="text-white">
-                <div className="text-center mb-5">
-                  <h1 className="text-3xl font-bold">SignUp :)</h1>
-                  <br />
-                  <p>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Saepe ducimus dicta voluptatem ad labore, consequuntur
-                    asperiores cupiditate ab dolorum odit nobis rem totam quos
-                    officia ipsum ipsam officiis neque cum.
-                  </p>
-                </div>
+            <div className="bg-yellow-500 w-full max-w-lg p-8 min-h-[70vh] flex items-center page register-page md:block hidden">
+              <div className="min-h-screen flex items-center justify-center">
+                <div className="text-white">
+                  <div className="text-center mb-5">
+                    <h1 className="text-3xl font-bold">
+                      สมัครสมาชิกกับ CONHUB :)
+                    </h1>
+                    <br />
+                    <p>
+                      เข้าร่วมกับเราที่ CONHUB
+                      เพื่อรับประสบการณ์ใหม่ในการซื้อตั๋วคอนเสิร์ตที่สะดวกสบายและรวดเร็ว!
+                      สร้างบัญชีของคุณวันนี้
+                      เพื่อให้ไม่พลาดทุกความบันเทิงจากคอนเสิร์ตสุดพิเศษจากศิลปินที่คุณชื่นชอบ
+                      เข้าถึงข้อเสนอสุดพิเศษและกิจกรรมพิเศษต่างๆ ที่เรามีให้
+                    </p>
+                  </div>
 
-                <div className="flex items-end">
-                  <NavLink to="/login">
-                    <button className="w-full mt-3 text-md text-white py-2 px-4 text-center gap-1 border-transparent hover:border-white hover:border-2 hover:pb-[5px] active:text-white transition-all duration-200 rounded-lg">
-                      เป็นสมาชิกแล้ว
-                    </button>
-                  </NavLink>
+                  <div className="flex items-end">
+                    <NavLink to="/login">
+                      <button className="w-full mt-3 text-md text-white py-2 px-4 text-center gap-1 border-transparent hover:border-white hover:border-2 hover:pb-[5px] transition-all duration-200 rounded-lg">
+                        เป็นสมาชิกแล้ว
+                      </button>
+                    </NavLink>
+                  </div>
                 </div>
               </div>
             </div>

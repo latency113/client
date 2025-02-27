@@ -5,6 +5,8 @@ import Sidebar from "../../components/Sidebar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UserService from "../../services/user.service";
+import BottomNav from "../../components/BottomNav";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [data, setData] = useState(null);
@@ -18,19 +20,22 @@ const Profile = () => {
     pictureUrl: "https://www.nc.ac.th/img/logo.png",
     password: "",
   });
+  const [fileName, setFileName] = useState("");
   const [image, setImage] = useState(null);
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+
     if (token) {
-      fetch("http://localhost:4000/api/user/profile", {
+      UserService.getUserProfile({
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-        .then((response) => response.json())
-        .then((data) => {
+        .then((response) => {
+          const data = response.data;
           setData(data);
           setUserInfo({
             name: data.user.name,
@@ -47,6 +52,10 @@ const Profile = () => {
     } else {
       setError("ไม่พบข้อมูลผู้ใช้");
       setIsLoading(false);
+      toast.error("กรุณาเข้าสู่ระบบ", { autoClose: 3000 });
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
     }
   }, []);
 
@@ -62,6 +71,7 @@ const Profile = () => {
     const file = e.target.files[0];
     if (file) {
       setImage(file);
+      setFileName(file.name); // แสดงชื่อไฟล์
     }
   };
 
@@ -117,7 +127,6 @@ const Profile = () => {
           });
       }
     } else {
-      // ถ้าไม่มีการเปลี่ยนแปลง
       toast.info("ข้อมูลของคุณไม่มีการเปลี่ยนแปลง", {
         autoClose: 2000,
       });
@@ -144,7 +153,12 @@ const Profile = () => {
     return (
       <div>
         <Navbar />
-        <p>{error}</p>
+        <div className="min-h-screen flex justify-center items-center mt-5">
+          <div className="text-center">
+            <h1 className="text-6xl">404</h1>
+            <p className="text-3xl">{error}</p>
+          </div>
+        </div>
         <Footer />
       </div>
     );
@@ -158,7 +172,7 @@ const Profile = () => {
           {data && data.user ? (
             <div className="flex justify-center ">
               <div className="max-w-6xl w-full">
-                <main className="flex max-w-6xl w-full bg-white shadow-lg rounded-lg overflow-hidden p-6">
+                <main className="flex max-w-6xl w-full bg-white shadow-lg rounded-lg overflow-hidden p-4 ">
                   <Sidebar />
                   <div className="w-full">
                     <h1 className="text-center text-3xl font-semibold text-black mb-6">
@@ -173,7 +187,10 @@ const Profile = () => {
                     </div>
                     <div className="flex justify-center">
                       {isEditing ? (
-                        <form onSubmit={handleSubmit} className="space-y-6">
+                        <form
+                          onSubmit={handleSubmit}
+                          className="space-y-6 w-full md:w-2/4"
+                        >
                           <div>
                             <label className="block text-lg text-gray-600">
                               ชื่อผู้ใช้:
@@ -267,14 +284,41 @@ const Profile = () => {
                             />
                           </div>
                           <div>
-                            <label className="block text-lg text-gray-600">
-                              อัปโหลดรูปโปรไฟล์:
+                            <label className="flex items-center gap-2 cursor-pointer w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg mb-4">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                className="lucide lucide-hard-drive-upload"
+                              >
+                                <path d="m16 6-4-4-4 4" />
+                                <path d="M12 2v8" />
+                                <rect
+                                  width="20"
+                                  height="8"
+                                  x="2"
+                                  y="14"
+                                  rx="2"
+                                />
+                                <path d="M6 18h.01" />
+                                <path d="M10 18h.01" />
+                              </svg>
+                              {fileName
+                                ? `ไฟล์ที่เลือก: ${fileName}`
+                                : "อัพเดทโปรไฟล์"}
+                              <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageChange}
+                                className="hidden"
+                              />
                             </label>
-                            <input
-                              type="file"
-                              onChange={handleImageChange}
-                              className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg"
-                            />
                             {image && (
                               <div className="mt-3 flex justify-center">
                                 <p className="text-lg text-gray-700">
@@ -291,14 +335,14 @@ const Profile = () => {
                           <div className="flex justify-between mt-6">
                             <button
                               type="submit"
-                              className="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              className="flex justify-center w-full mt-3 text-blue-500 py-2 px-4 text-center gap-1 border-transparent hover:border-blue-500 hover:border-b-2 hover:pb-[5px] rounded-lg transition-all duration-200"
                             >
                               บันทึกการเปลี่ยนแปลง
                             </button>
                             <button
                               type="button"
                               onClick={() => setIsEditing(false)}
-                              className="bg-gray-500 text-white p-3 rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                              className="flex justify-center w-full mt-3 text-gray-500 py-2 px-4 text-center gap-1 border-transparent hover:border-gray-500 hover:border-b-2 hover:pb-[5px] rounded-lg transition-all duration-200"
                             >
                               ยกเลิก
                             </button>
@@ -319,7 +363,7 @@ const Profile = () => {
                             <div className="mt-6">
                               <button
                                 onClick={() => setIsEditing(true)}
-                                className="flex justify-center w-full mt-3 text-blue-500 py-2 px-4 text-center gap-1 border-transparent hover:border-blue-500 hover:border-b-2 hover:pb-[5px] active:text-blue-700 transition-all duration-200"
+                                className="flex justify-center w-full mt-3 text-blue-500 py-2 px-4 text-center gap-1 border-transparent hover:border-blue-500 hover:border-b-2 hover:pb-[5px] rounded-lg transition-all duration-200"
                               >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -355,7 +399,9 @@ const Profile = () => {
         </div>
       </div>
       <ToastContainer />
+
       <Footer />
+      <BottomNav />
     </>
   );
 };

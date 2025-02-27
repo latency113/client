@@ -43,24 +43,27 @@ const Login = () => {
         {/* หน้า login */}
         <div className="flex justify-center items-center h-screen bg-white">
           <div className="container mx-auto flex justify-center items-center">
-            <div className="bg-blue-500 w-full max-w-lg p-8 min-h-[70vh] flex items-center page login-page">
-              <div className="text-white">
-                <div className="text-center mb-5">
-                  <h1 className="text-3xl">Welcome to CONHUB :)</h1>
-                  <br />
-                  <p>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Saepe ducimus dicta voluptatem ad labore, consequuntur
-                    asperiores cupiditate ab dolorum odit nobis rem totam quos
-                    officia ipsum ipsam officiis neque cum.
-                  </p>
-                </div>
-                <div className="flex items-end">
-                  <NavLink to="/register">
-                    <button className="w-full mt-3 text-md text-white py-2 px-4 text-center gap-1 border-transparent hover:border-white hover:border-2 hover:pb-[5px] active:text-white transition-all duration-200 rounded-lg">
-                      ยังไม่ได้เป็นสมาชิก
-                    </button>
-                  </NavLink>
+            <div className="bg-blue-500 w-full max-w-lg p-8 min-h-[70vh] flex items-center page login-page md:block hidden">
+              <div className="min-h-screen flex items-center justify-center bg-blue-500">
+                <div className="text-white">
+                  <div className="text-center mb-5">
+                    <h1 className="text-3xl">ยินดีต้อนรับสู่ CONHUB :)</h1>
+                    <br />
+                    <p>
+                      ค้นหาคอนเสิร์ตที่คุณชื่นชอบและซื้อบัตรได้ง่ายๆ ที่ CONHUB!
+                      แพลตฟอร์มที่ให้คุณเข้าถึงทุกคอนเสิร์ตจากศิลปินชั้นนำ
+                      และรับประสบการณ์ที่ไม่มีวันลืม
+                      พบกับความสนุกและความบันเทิงในทุกๆ
+                      งานคอนเสิร์ตได้แล้ววันนี้
+                    </p>
+                  </div>
+                  <div className="flex items-end">
+                    <NavLink to="/register">
+                      <button className="w-full mt-3 text-md text-white py-2 px-4 text-center gap-1 border-transparent hover:border-white hover:border-2 hover:pb-[5px] active:text-white transition-all duration-200 rounded-lg">
+                        ยังไม่ได้เป็นสมาชิก
+                      </button>
+                    </NavLink>
+                  </div>
                 </div>
               </div>
             </div>
@@ -103,6 +106,11 @@ const Login = () => {
                     เข้าสู่ระบบ
                   </button>
                 </form>
+                <NavLink to="/register">
+                  <button className="md:hidden w-full mt-3 text-md text-blue-700 py-2 px-4 text-center gap-1 border-transparent hover:border-blue-700 hover:border-2 hover:pb-[5px] bottom-0 transition-all duration-200 rounded-lg">
+                    ยังไม่ได้เป็นสมาชิก
+                  </button>
+                </NavLink>
               </div>
               <ToastContainer />
             </div>

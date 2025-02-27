@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import concertService from "../services/concert.service";
 import ConcertCard from "../components/ConcertCard";
+import BottomNav from "../components/BottomNav";
 
 const Concert = () => {
   const [concert, setConcert] = useState([]);
@@ -64,13 +65,15 @@ const Concert = () => {
       }
     }
   };
+  
 
   return (
     <>
       <div className="bg-white min-h-screen">
         <Navbar />
         <div className="flex justify-center text-center">
-          <div className="flex flex-col text-blue-500 font-semibold p-10 container mx-auto">
+          <div className="flex flex-col text-blue-500 font-semibold p-5 container mx-auto">
+            <hr />
             <span className=" text-5xl">
               สำรวจคอนเสิร์ตและกิจกรรมที่กำลังจะมาถึง!
             </span>
@@ -200,13 +203,15 @@ const Concert = () => {
             </nav>
           </div>
           {/* Card Grid */}
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 ">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 ">
             {concert.map((concert) => (
               <ConcertCard key={concert.id} {...concert} />
             ))}
           </div>
         </div>
       </div>
+      <hr />
+      <BottomNav/>
       <Footer />
     </>
   );

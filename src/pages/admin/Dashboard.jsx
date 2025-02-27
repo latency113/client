@@ -48,7 +48,7 @@ const Dashboard = () => {
       <Sidebar />
       <div className="flex-1">
         <Navbar />
-        <div className="mt-6 p-6">
+        <div className="container mx-auto mt-6">
           <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">
             Admin Dashboard
           </h2>

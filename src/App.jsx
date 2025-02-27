@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import Concert from "./pages/Concert";
 import News from "./pages/News";
 import Profile from "./pages/user/Profile";
-import ConcertDetail from "./pages/concertPages/concertDetail";
+import ConcertDetail from "./components/ConcertDetail";
 import Dashboard from "./pages/admin/Dashboard";
 import AdminConcert from "./pages/admin/concert/Concert";
 import User from "./pages/admin/User";
@@ -15,7 +15,8 @@ import NotFound from "./pages/NotFound";
 import EditConcert from "./pages/admin/components/EditConcert";
 import AdminRoute from "./pages/admin/components/AdminRoute";
 import SearchResults from "./pages/SearchResults";
-import Payment from "./pages/user/Payment";
+import Checkout from "./pages/user/Checkout";
+import CheckoutComplete from './pages/user/CheckoutComplete';
 
 const App = () => {
   return (
@@ -30,7 +31,8 @@ const App = () => {
         <Route path="/concert/:id" element={<ConcertDetail />} />
         <Route path="/user/tickets" element={<Booking />} />
         <Route path="/search-results" element={<SearchResults />} />
-        <Route path="/concert/payment" element={<Payment />} />
+        <Route path="/user/checkout/:id" element={<Checkout />} />
+        <Route path="/user/complete/:session" element={<CheckoutComplete />} />
         <Route
           path="/admin/dashboard"
           element={

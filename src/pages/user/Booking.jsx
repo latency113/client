@@ -7,6 +7,8 @@ import QRCode from "qrcode";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Sidebar from "../../components/Sidebar";
+import BottomNav from "./../../components/BottomNav";
+import { NavLink } from "react-router-dom";
 
 const ConcertBooking = () => {
   const [bookings, setBookings] = useState([]);
@@ -125,6 +127,13 @@ const ConcertBooking = () => {
       );
       doc.text(`สถานที่: ${booking.concertDetails.venue}`, 20, 80);
       doc.text(`จำนวนบัตร: ${booking.quantity}`, 20, 90);
+      doc.text(
+        `สถานะ: ${
+          booking.status === "NotPaying" ? "ยังไม่จ่ายเงิน" : "จ่ายเงินแล้ว"
+        }`,
+        20,
+        100
+      );
 
       // เพิ่ม QR Code ลงใน PDF
       doc.addImage(qrCodeURL, "PNG", 140, 120, 50, 50);
@@ -164,7 +173,7 @@ const ConcertBooking = () => {
               <h1 className="text-3xl font-bold text-gray-800 text-center mb-5">
                 บัตรของคุณ
               </h1>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-5">
+              <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-5">
                 {bookings.map((booking) => {
                   const selectedSchedule =
                     booking.concertDetails?.Schedule?.find(
@@ -269,7 +278,9 @@ const ConcertBooking = () => {
                             fill="currentColor"
                           />
                         </svg>
-                        ราคา: {booking.concertDetails?.price || "N/A"} บาท
+                        ราคา:{" "}
+                        {booking.concertDetails?.price * booking.totalTickets}{" "}
+                        บาท
                       </p>
                       <p className="text-gray-600 flex gap-1 py-1 font-bold">
                         <svg
@@ -287,19 +298,9 @@ const ConcertBooking = () => {
                           <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
                           <path d="m9 12 2 2 4-4" />
                         </svg>
-                        จำนวนบัตร: {booking.quantity}
+                        จำนวนบัตร: {booking.totalTickets} ใบ
                       </p>
-                      <p className="text-gray-600 flex gap-1 py-1 mt-2">
-                        วันที่ซื้อบัตร:{" "}
-                        {selectedSchedule
-                          ? moment(booking.bookingDate).format("DD/MM/YYYY")
-                          : "ไม่พบข้อมูล"}
-                      </p>
-                      <button
-                        onClick={() => downloadPDF(booking)}
-                        className="mt-3 text-blue-500 py-2 px-4 flex items-center gap-1 border-transparent hover:border-blue-500 hover:border-b-2 hover:pb-[5px] transition-all duration-200"
-                      >
-                        ดาวน์โหลดบัตร{" "}
+                      <p className="text-gray-600 flex gap-1 py-1 font-bold">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
@@ -310,12 +311,38 @@ const ConcertBooking = () => {
                           stroke-width="2"
                           stroke-linecap="round"
                           stroke-linejoin="round"
-                          className="lucide lucide-ticket-check"
+                          class="lucide lucide-shield-check"
                         >
-                          <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
+                          <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
                           <path d="m9 12 2 2 4-4" />
                         </svg>
-                      </button>
+                        สถานะ:{" "}
+                        {booking.status === "NotPaying" ? (
+                          <p className="text-red-500">ยังไม่ชำระเงิน</p>
+                        ) : (
+                          <p className="text-green-700">ชำระเงินแล้ว</p>
+                        )}
+                      </p>
+                      <p className="text-gray-600 flex gap-1 py-1 mt-2">
+                        วันที่ซื้อบัตร:{" "}
+                        {selectedSchedule
+                          ? moment(booking.bookingDate).format("DD/MM/YYYY")
+                          : "ไม่พบข้อมูล"}
+                      </p>
+                      {booking.status !== "NotPaying" ? (
+                        <button
+                          onClick={() => downloadPDF(booking)}
+                          className="mt-3 text-blue-500 py-2 px-4 flex items-center gap-1 border-transparent hover:border-blue-500 hover:border-b-2 hover:pb-[5px] transition-all duration-200 rounded-lg"
+                        >
+                          ดาวน์โหลดบัตร{" "}
+                        </button>
+                      ) : (
+                        <NavLink to={`/user/checkout/${booking.id}`}>
+                          <button className="mt-3 text-red-500 py-2 px-4 flex items-center gap-1 border-transparent hover:border-red-500 hover:border-b-2 hover:pb-[5px] transition-all duration-200 rounded-lg">
+                            ชำระเงิน
+                          </button>
+                        </NavLink>
+                      )}
                     </div>
                   );
                 })}
@@ -324,6 +351,7 @@ const ConcertBooking = () => {
           </div>
         </div>
       </div>
+      <BottomNav />
       <Footer />
     </>
   );

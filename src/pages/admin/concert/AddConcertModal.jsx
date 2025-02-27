@@ -11,6 +11,7 @@ const AddConcertModal = ({ isOpen, onClose }) => {
   const [brands, setBrands] = useState([]); // State to hold the list of brands
   const [seatsAvailable, setSeatsAvailable] = useState("");
   const [picture, setPicture] = useState(null);
+  const [fileName, setFileName] = useState('');
   const [schedules, setSchedules] = useState([
     { date: "", startTime: "", endTime: "" },
   ]);
@@ -29,7 +30,12 @@ const AddConcertModal = ({ isOpen, onClose }) => {
     fetchBrands(); // เรียก fetchBrands เมื่อคอมโพเนนต์โหลดเสร็จ
   }, []);
 
-  const handleFileChange = (e) => setPicture(e.target.files[0]);
+  const handleFileChange = (e) => {
+    setPicture(e.target.files[0]);
+    if (setPicture) {
+      setFileName(setPicture.name); // แสดงชื่อไฟล์
+    }
+  };
 
   const handleAddSchedule = () => {
     setSchedules([...schedules, { date: "", startTime: "", endTime: "" }]);
@@ -131,7 +137,7 @@ const AddConcertModal = ({ isOpen, onClose }) => {
             className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg mb-4"
             required
           />
-          เลือกวง
+          เลือกวงดนตรี
           <select
             value={brand}
             onChange={(e) => setBrand(e.target.value)}
@@ -173,7 +179,7 @@ const AddConcertModal = ({ isOpen, onClose }) => {
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="lucide lucide-hard-drive-upload"
+              className="lucide lucide-hard-drive-upload"
             >
               <path d="m16 6-4-4-4 4" />
               <path d="M12 2v8" />
@@ -181,15 +187,14 @@ const AddConcertModal = ({ isOpen, onClose }) => {
               <path d="M6 18h.01" />
               <path d="M10 18h.01" />
             </svg>
-            Select File
+            {fileName ? `ไฟล์ที่เลือก: ${fileName}` : "เลือกรูปภาพ"}
             <input
               type="file"
-              accept="images/photo/*"
+              accept="image/*"
               onChange={handleFileChange}
               className="hidden"
             />
           </label>
-
           {/* Schedule Section */}
           <div className="my-4">
             <div className="flex justify-between items-center mb-2">
@@ -275,7 +280,6 @@ const AddConcertModal = ({ isOpen, onClose }) => {
                 </div>
               ))}
           </div>
-
           <button
             type="submit"
             className="w-full mt-3 text-xl text-green-500 py-2 px-4 text-center gap-1 border-transparent hover:border-green-500 hover:border-b-2 hover:pb-[5px] rounded-lg transition-all duration-200"

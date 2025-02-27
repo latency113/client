@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, NavLink } from "react-router-dom";
 import concertService from "../services/concert.service";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { debounce } from "lodash";
 
 const SearchResults = () => {
   const [concertList, setConcertList] = useState([]);
@@ -12,16 +13,19 @@ const SearchResults = () => {
   const query = queryParams.get("query");
 
   const fetchConcert = (query) => {
+    if (!query) return;
     concertService
       .getQuery(query)
       .then((response) => {
         setConcertList(response.data.concerts);
-        console.log(response.data.concerts);
       })
       .catch((e) => {
         console.log(e);
       });
   };
+
+  // Create debounced function to delay API call while typing
+  const debouncedFetchConcert = debounce(fetchConcert, 500);
 
   useEffect(() => {
     if (query) {
@@ -29,6 +33,11 @@ const SearchResults = () => {
       fetchConcert(query);
     }
   }, [query]);
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+    debouncedFetchConcert(e.target.value);
+  };
 
   return (
     <>
@@ -41,16 +50,13 @@ const SearchResults = () => {
               type="text"
               placeholder="ค้นหาคอนเสิร์ต"
               value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value); // Update searchQuery state
-                fetchConcert(e.target.value); // Fetch concerts based on the new query
-              }}
+              onChange={handleSearchChange}
               className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
         </div>
 
-        <div className="container flex jutify-center mx-auto ">
+        <div className="container flex justify-center mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {concertList.length > 0 ? (
               concertList.map((concert) => (
@@ -58,9 +64,6 @@ const SearchResults = () => {
                   key={concert.id}
                   className="concert-card bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
                 >
-
-
-                  
                   <div className="flex flex-col justify-between p-4">
                     <div className="w-full flex justify-center mb-4">
                       <div className="w-48 h-48 overflow-hidden rounded-lg">
@@ -172,7 +175,7 @@ const SearchResults = () => {
                       <div className="flex items-end">
                         <NavLink
                           to={`/concert/${concert.id}`}
-                          className="flex justify-center w-full mt-3 text-blue-500 py-2 px-4 text-center gap-1 border-transparent hover:border-blue-500 hover:border-b-2 hover:pb-[5px] active:text-blue-700 transition-all duration-200"
+                          className="flex justify-center w-full mt-3 text-blue-500 py-2 px-4 text-center gap-1 border-transparent hover:border-blue-500 hover:border-b-2 hover:pb-[5px] rounded-lg transition-all duration-200"
                         >
                           ดูรายละเอียด
                         </NavLink>

@@ -8,6 +8,7 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -34,6 +35,10 @@ const Navbar = () => {
     }
   }, []);
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   const Logout = () => {
     localStorage.removeItem("token");
     toast.success("ออกจากระบบสำเร็จ");
@@ -45,15 +50,98 @@ const Navbar = () => {
   return (
     <div className="mb-[130px]">
       <div className="fixed top-0 left-0 w-full z-50 text-blue-500">
-        <div className="bg-white p-3 ">
+        <div className="bg-white p-3">
           <div className="flex justify-center">
-            <div className="container">
-              <div className="flex justify-between ">
+            <div className="container w-full">
+              <div className="flex justify-between items-center">
                 <div className="flex items-center">
                   <h1 className="text-2xl font-bold text-blue-500">
-                    <a href="/">CONHUB</a></h1>
+                    <a href="/">CONHUB</a>
+                  </h1>
                 </div>
-
+                <div className="px-5 text-blue-500">
+                  {/* Menu */}
+                  <nav className="navb">
+                    <ul
+                      className={`${
+                        isMenuOpen ? "block" : "hidden"
+                      } md:flex md:flex-row gap-10 justify-center md:block w-full`}
+                    >
+                      <li>
+                        <NavLink to="/" className="flex items-center space-x-2">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path d="m4.5 8 10.58-5.06a1 1 0 0 1 1.342.488L18.5 8" />
+                            <path d="M6 10V8" />
+                            <path d="M6 14v1" />
+                            <path d="M6 19v2" />
+                            <rect x="2" y="8" width="20" height="13" rx="2" />
+                          </svg>
+                          <p className="">หน้าแรก</p>
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink
+                          to="/concert"
+                          className="flex items-center space-x-2"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path d="m4.5 8 10.58-5.06a1 1 0 0 1 1.342.488L18.5 8" />
+                            <path d="M6 10V8" />
+                            <path d="M6 14v1" />
+                            <path d="M6 19v2" />
+                            <rect x="2" y="8" width="20" height="13" rx="2" />
+                          </svg>
+                          <p className="">คอนเสิร์ต</p>
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink
+                          to="/news"
+                          className="flex items-center space-x-2"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path d="m4.5 8 10.58-5.06a1 1 0 0 1 1.342.488L18.5 8" />
+                            <path d="M6 10V8" />
+                            <path d="M6 14v1" />
+                            <path d="M6 19v2" />
+                            <rect x="2" y="8" width="20" height="13" rx="2" />
+                          </svg>
+                          <p className="">ข่าวสาร</p>
+                        </NavLink>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
                 <div>
                   {isLoggedIn ? (
                     <span className="flex gap-3 text-lg text-blue-500">
@@ -158,126 +246,6 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-
-        <nav>
-          <ul className="navb flex gap-10 justify-center bg-gradient-to-r from-cyan-500 to-blue-500 shadow-xl">
-            <li>
-              <NavLink to="/" className="space-x-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-white"
-                >
-                  <path d="m4.5 8 10.58-5.06a1 1 0 0 1 1.342.488L18.5 8" />
-                  <path d="M6 10V8" />
-                  <path d="M6 14v1" />
-                  <path d="M6 19v2" />
-                  <rect x="2" y="8" width="20" height="13" rx="2" />
-                </svg>
-                <p className="text-white">หน้าแรก</p>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/concert" className="space-x-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-white"
-                >
-                  <path d="m4.5 8 10.58-5.06a1 1 0 0 1 1.342.488L18.5 8" />
-                  <path d="M6 10V8" />
-                  <path d="M6 14v1" />
-                  <path d="M6 19v2" />
-                  <rect x="2" y="8" width="20" height="13" rx="2" />
-                </svg>
-                <p className="text-white">คอนเสิร์ต</p>
-              </NavLink>
-            </li>
-            {/* <li>
-            <NavLink to="/artist" className="space-x-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="text-white"
-              >
-                <path d="m4.5 8 10.58-5.06a1 1 0 0 1 1.342.488L18.5 8" />
-                <path d="M6 10V8" />
-                <path d="M6 14v1" />
-                <path d="M6 19v2" />
-                <rect x="2" y="8" width="20" height="13" rx="2" />
-              </svg>
-              <p className="text-white">ศิลปิน</p>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/products" className="space-x-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="text-white"
-              >
-                <path d="m4.5 8 10.58-5.06a1 1 0 0 1 1.342.488L18.5 8" />
-                <path d="M6 10V8" />
-                <path d="M6 14v1" />
-                <path d="M6 19v2" />
-                <rect x="2" y="8" width="20" height="13" rx="2" />
-              </svg>
-              <p className="text-white">สินค้า</p>
-            </NavLink>
-          </li> */}
-            <li>
-              <NavLink to="/news" className="space-x-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-white"
-                >
-                  <path d="m4.5 8 10.58-5.06a1 1 0 0 1 1.342.488L18.5 8" />
-                  <path d="M6 10V8" />
-                  <path d="M6 14v1" />
-                  <path d="M6 19v2" />
-                  <rect x="2" y="8" width="20" height="13" rx="2" />
-                </svg>
-                <p className="text-white">ข่าวสาร</p>
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
         <ToastContainer />
       </div>
     </div>

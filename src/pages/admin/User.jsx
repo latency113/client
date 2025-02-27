@@ -24,34 +24,26 @@ const User = () => {
 
   const handleDeleteUser = async (id) => {
     Swal.fire({
-        title: 'ต้องการลบผู้ใช้นี้ใช่มั้ย',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: 'red',
-        cancelButtonColor: 'gray',
-        cancelButtonText: 'ยกเลิก',
-        confirmButtonText: 'ตกลง'
-    }).then(async (result) => { 
-        if (result.isConfirmed) {
-            try {
-                await UserService.deleteUser(id);
-                setUsers(users.filter((users) => users.id !== id));
-                Swal.fire(
-                    'Deleted!',
-                    'Your users has been deleted.',
-                    'success'
-                );
-            } catch (err) {
-                console.error("Delete error:", err);
-                Swal.fire(
-                    'Error!',
-                    'เกิดข้อผิดพลาด: ' + err.message,
-                    'error'
-                );
-            }
+      title: "ต้องการลบผู้ใช้นี้ใช่มั้ย",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "red",
+      cancelButtonColor: "gray",
+      cancelButtonText: "ยกเลิก",
+      confirmButtonText: "ตกลง",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await UserService.deleteUser(id);
+          setUsers(users.filter((users) => users.id !== id));
+          Swal.fire("Deleted!", "Your users has been deleted.", "success");
+        } catch (err) {
+          console.error("Delete error:", err);
+          Swal.fire("Error!", "เกิดข้อผิดพลาด: " + err.message, "error");
         }
+      }
     });
-};
+  };
 
   const handleEditRole = async () => {
     if (!newRole || !selectedUser) {
@@ -87,45 +79,60 @@ const User = () => {
   }
 
   return (
-    <div className="flex h-screen bg-gray-100"> {/* Added h-screen and bg-gray-100 */}
+    <div className="flex h-screen bg-gray-100">
       <Sidebar />
-      <div className="flex-1 overflow-y-auto p-6"> {/* Added overflow-y-auto */}
+      <div className="flex-1 overflow-y-auto ">
         <Navbar />
-        <div className="container mx-auto"> {/* Added container for centering */}
+        <div className="container mx-auto">
           <h2 className="text-3xl font-bold my-6 text-center text-gray-800">
             Manage Users
           </h2>
-
-          <div className="bg-white shadow-md rounded-lg p-6 min-h-screen"> {/* Card for the table */}
-            <h3 className="text-2xl font-semibold mb-4 text-gray-700">User List</h3>
-            <table className="w-full border-collapse table-auto"> {/* Added table-auto */}
+          <div className="bg-white shadow-md rounded-lg p-6 min-h-screen">
+            <h3 className="text-2xl font-semibold mb-4 text-gray-700">
+              User List
+            </h3>
+            <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-gray-200 text-gray-700"> {/* Improved header styling */}
-                  <th className="p-3 text-left font-medium uppercase tracking-wider">Username</th>
-                  <th className="p-3 text-left font-medium uppercase tracking-wider">Email</th>
-                  <th className="p-3 text-left font-medium uppercase tracking-wider">Role</th>
-                  <th className="p-3 text-left font-medium uppercase tracking-wider">Actions</th>
+                <tr className="border-b bg-gray-100 text-gray-700">
+                  <th className="p-3 text-left uppercase tracking-wider">
+                    ชื่อผู้ใช้
+                  </th>
+                  <th className="p-3 text-left uppercase tracking-wider">
+                    อีเมล
+                  </th>
+                  <th className="p-3 text-left uppercase tracking-wider">
+                    บทบาท
+                  </th>
+                  <th className="p-3 text-left uppercase tracking-wider">
+                    Actions
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {users.map((user) => (
-                  <tr key={user.id} className="border-b hover:bg-gray-50"> {/* Added hover effect */}
+                  <tr key={user.id} className="border-b hover:bg-gray-50">
+                    {" "}
+                    {/* Added hover effect */}
                     <td className="p-3">{user.name}</td>
                     <td className="p-3">{user.email}</td>
-                    <td className="p-3">{user.role === "admin" ? "ผู้ดูแลระบบ" : "ผู้ใช้งาน"}</td>
-                    <td className="p-3 flex space-x-2"> {/* Added flex for buttons */}
+                    <td className="p-3">
+                      {user.role === "admin" ? "ผู้ดูแลระบบ" : "ผู้ใช้งาน"}
+                    </td>
+                    <td className="p-3 flex space-x-2">
+                      {" "}
+                      {/* Added flex for buttons */}
                       <button
                         onClick={() => {
                           setSelectedUser(user);
                           setNewRole(user.role);
                         }}
-                        className="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded"
+                        className="text-md text-yellow-500 py-2 px-4 text-center gap-1 border-transparent rounded-lg hover:border-yellow-500 hover:border-b-2 hover:pb-[5px] transition-all duration-200"
                       >
                         Edit Role
                       </button>
                       <button
                         onClick={() => handleDeleteUser(user.id)}
-                        className="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded"
+                        className="text-md text-red-500 py-2 px-4 text-center gap-1 border-transparent rounded-lg hover:border-red-500 hover:border-b-2 hover:pb-[5px] transition-all duration-200"
                       >
                         Delete
                       </button>
@@ -135,38 +142,41 @@ const User = () => {
               </tbody>
             </table>
           </div>
-
           {/* Modal */}
           {selectedUser && (
             <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
               <div className="bg-white p-8 rounded-lg shadow-lg w-1/3">
                 <h3 className="text-2xl font-semibold mb-4 text-gray-800">
-                  Edit Role for <span className="text-red-500">{selectedUser.name}</span>
+                  เปลี่ยนบทบาทของผู้ใช้{" "}
+                  <span className="text-red-500">{selectedUser.name}</span>
                 </h3>
                 <div>
+                  เลือกบทบาท:
                   <select
                     value={newRole}
                     onChange={(e) => {
                       console.log("Selected role:", e.target.value);
                       setNewRole(e.target.value);
                     }}
-                    className="border p-2 rounded w-full mb-4"
+                    className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg mb-4"
                   >
                     <option value="">Select Role</option>
                     <option value="admin">ผู้ดูแลระบบ</option>
                     <option value="user">ผู้ใช้งาน</option>
                   </select>
                 </div>
-                <div className="flex justify-end space-x-2"> {/* Aligned buttons to the right */}
+                <div className="flex justify-end space-x-2">
+                  {" "}
+                  {/* Aligned buttons to the right */}
                   <button
                     onClick={handleEditRole}
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded"
+                    className="text-md text-blue-500 py-2 px-4 text-center gap-1 border-transparent rounded-lg hover:border-blue-500 hover:border-b-2 hover:pb-[5px] transition-all duration-200"
                   >
                     Save
                   </button>
                   <button
                     onClick={() => setSelectedUser(null)}
-                    className="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded"
+                    className="text-md text-gray-500 py-2 px-4 text-center gap-1 border-transparent rounded-lg hover:border-gray-500 hover:border-b-2 hover:pb-[5px] transition-all duration-200"
                   >
                     Cancel
                   </button>
@@ -174,7 +184,6 @@ const User = () => {
               </div>
             </div>
           )}
-
           <ToastContainer />
         </div>
       </div>

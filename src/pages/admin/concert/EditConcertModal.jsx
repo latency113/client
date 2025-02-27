@@ -10,7 +10,8 @@ const EditConcertModal = ({ isOpen, onClose, concert }) => {
   const [brand, setBrand] = useState("");
   const [brands, setBrands] = useState([]);
   const [seatsAvailable, setSeatsAvailable] = useState("");
-  const [image, setImage] = useState(null); // ใช้สำหรับเก็บภาพที่เลือก
+  const [image, setImage] = useState(null);
+  const [fileName, setFileName] = useState("");
   const [schedules, setSchedules] = useState([]);
 
   useEffect(() => {
@@ -57,6 +58,7 @@ const EditConcertModal = ({ isOpen, onClose, concert }) => {
       const validTypes = ["image/jpeg", "image/png", "image/gif"];
       if (validTypes.includes(file.type)) {
         setImage(file);
+        setFileName(file.name); // แสดงชื่อไฟล์
       } else {
         toast.error("Please upload a valid image (JPEG, PNG, GIF).");
       }
@@ -172,6 +174,7 @@ const EditConcertModal = ({ isOpen, onClose, concert }) => {
         </div>
 
         <form onSubmit={handleSubmit}>
+          ชื่อคอนเสิร์ต
           <input
             type="text"
             placeholder="Concert Name"
@@ -180,6 +183,7 @@ const EditConcertModal = ({ isOpen, onClose, concert }) => {
             className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg mb-4"
             required
           />
+          สถานที่จัดงาน
           <input
             type="text"
             placeholder="Venue"
@@ -188,6 +192,7 @@ const EditConcertModal = ({ isOpen, onClose, concert }) => {
             className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg mb-4"
             required
           />
+          เลือกวงดนตรี
           <select
             value={brand}
             onChange={(e) => setBrand(e.target.value)}
@@ -200,6 +205,7 @@ const EditConcertModal = ({ isOpen, onClose, concert }) => {
               </option>
             ))}
           </select>
+          ราคาบัตร
           <input
             type="number"
             placeholder="Price"
@@ -208,6 +214,7 @@ const EditConcertModal = ({ isOpen, onClose, concert }) => {
             className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg mb-4"
             required
           />
+          จำนวนบัตร
           <input
             type="number"
             placeholder="Seats Available"
@@ -216,17 +223,6 @@ const EditConcertModal = ({ isOpen, onClose, concert }) => {
             className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg mb-4"
             required
           />
-
-          {/* แสดงภาพตัวอย่างถ้ามีการเลือกไฟล์ */}
-          {image && (
-            <img
-              src={
-                typeof image === "string" ? image : URL.createObjectURL(image)
-              }
-              alt="Concert"
-              className="w-full h-40 object-cover rounded mb-2"
-            />
-          )}
 
           <label className="flex items-center gap-2 cursor-pointer w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg mb-4">
             <svg
@@ -247,7 +243,7 @@ const EditConcertModal = ({ isOpen, onClose, concert }) => {
               <path d="M6 18h.01" />
               <path d="M10 18h.01" />
             </svg>
-            Select File
+            {fileName ? `ไฟล์ที่เลือก: ${fileName}` : "เลือกรูปภาพ"}
             <input
               type="file"
               accept="images/photo/*"

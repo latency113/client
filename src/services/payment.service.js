@@ -1,11 +1,27 @@
 import http from "../../http-common";
 
-const payment = async () => {
+const checkout = async (token, id) => {
   try {
-    const token = localStorage.getItem("token");
-    if (!token) throw new Error("No token found");
+    const response = await http.post(
+      "/api/user/checkout",
+      { id },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
-    const response = await http.post("/api/user/create-checkout-session", {
+    return response;
+  } catch (error) {
+    console.error("Error creating concert:", error);
+    throw error;
+  }
+};
+
+const checkoutstatus = async (token, session) => {
+  try {
+    const response = await http.get(`/api/user/checkout-status/${session}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -18,8 +34,9 @@ const payment = async () => {
   }
 };
 
-const UserService = {
-  payment,
+const paymentService = {
+  checkout,
+  checkoutstatus,
 };
 
-export default UserService;
+export default paymentService;

@@ -21,6 +21,11 @@ body{
 }
 
 
+hr {
+    width: 100%;
+    margin: 20px auto;
+  }
+
 .sidebar {
     li {
         margin: 15px 0;
@@ -45,24 +50,26 @@ body{
 
 .navb {
     li {
-        margin: 15px 0;
-        
-        a {
-            display: ruby;
-            text-decoration: none;
-            color: white;
-            box-sizing: border-box;
-            transition: border-bottom 0.2s ease, padding-bottom 0.3s ease;
-
-            &:hover,
-            &.active {
-                border-bottom: 2px solid white;
-                padding-bottom: 5px;
-            }
+      margin: 15px 0;
+      
+      a {
+        display: ruby;
+        text-decoration: none;
+        color: rgb(59, 130, 246);
+        box-sizing: border-box;
+        padding: 5px 10px;
+        transition: all 0.3s ease;
+  
+        &:hover,
+        &.active {
+          border-bottom: 2px solid rgb(59, 130, 246);
+          padding-bottom: 5px;
+          border-radius: 0.3rem;
         }
+      }
     }
-}
-
+  }
+  
 .nava {
     li {
         a {
@@ -73,6 +80,7 @@ body{
             transition: border-bottom 0.2s ease;
 
             &:hover {
+                border-radius: 2px;
                 border-bottom: 2px solid rgb(59, 130, 246);
             }
         }
@@ -82,7 +90,7 @@ body{
 
 
 .bg-home {
-    background-image: url(/public/backgroundhome.jpg);
+    background-image: url(/public/background.jpg);
     background-size: cover; /* ให้ภาพขยายเต็มพื้นที่ */
     background-position: center; /* จัดตำแหน่งภาพให้อยู่ตรงกลาง */
     min-height: 35vh; /* ความสูงของ div ให้เท่ากับความสูงของหน้าจอ */
@@ -105,4 +113,6 @@ body{
     -ms-overflow-style: none;  /* For Internet Explorer and Edge */
     scrollbar-width: none;     /* For Firefox */
   }
+  
+
   
