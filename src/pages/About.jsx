@@ -12,7 +12,7 @@ const News = () => {
       <div className="bg-gray-100 min-h-screen flex flex-col items-center">
         <div className="w-full max-w-4xl p-6 bg-white shadow-lg rounded-lg mt-12">
           <h1 className="text-black text-center text-4xl font-semibold">
-            เกี่ยวกับเรา <FaReact className="inline ml-2 text-blue-500" />
+            เกี่ยวกับเรา <FaInfoCircle className="inline ml-2 text-blue-500" />
           </h1>
           <p className="text-gray-700 text-lg mt-6 text-center">
             โปรเจคนี้สร้างขึ้นเพื่อเป็นการทำงานส่งอาจารย์
