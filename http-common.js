@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://concert-yyqf.onrender.com/",
+  baseURL: "concert-production.up.railway.app/",
   headers: {
     "Content-type": "application/json"
   }
