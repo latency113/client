@@ -4,7 +4,7 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Home from "./pages/Home";
 import Concert from "./pages/Concert";
-import News from "./pages/News";
+import News from "./pages/About";
 import Profile from "./pages/user/Profile";
 import ConcertDetail from "./components/ConcertDetail";
 import Dashboard from "./pages/admin/Dashboard";
@@ -26,7 +26,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/concert" element={<Concert />} />
-        <Route path="/news" element={<News />} />
+        <Route path="/about" element={<About />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/concert/:id" element={<ConcertDetail />} />
         <Route path="/user/tickets" element={<Booking />} />
