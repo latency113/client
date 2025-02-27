@@ -17,14 +17,8 @@ const ConcertDetail = () => {
   const [userId, setUserId] = useState(null);
   const [selectedSchedule, setSelectedSchedule] = useState(null);
 
-<<<<<<< HEAD
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen); 
-=======
-
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen); // เปลี่ยนสถานะการเปิด/ปิด Modal
->>>>>>> 391ad409f7ae0b2c1049e887a79d0b08b0849e7c
   };
 
   const callApi = async () => {
