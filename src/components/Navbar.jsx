@@ -14,7 +14,7 @@ const Navbar = () => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      fetch("http://localhost:4000/api/user/profile", {
+      fetch("https://concert-production.up.railway.app/api/user/profile", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
