@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import concertService from "../services/concert.service";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BottomNav from "../components/BottomNav";
@@ -13,18 +12,6 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchConcert();
-  }, []);
-
-  const fetchConcert = () => {
-    setIsLoading(true);
-    concertService
-      .get()
-      .then((response) => setConcertList(response.data.concerts))
-      .catch((e) => console.error("เกิดข้อผิดพลาดในการโหลดข้อมูล:", e))
-      .finally(() => setIsLoading(false));
-  };
 
   const handleSearch = (e) => {
     e.preventDefault();

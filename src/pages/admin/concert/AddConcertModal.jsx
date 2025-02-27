@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import concertService from "../../../services/concert.service";
+import concertService from "../../../services/Concert.service";
 import brandService from "../../../services/brand.service";
 
 const AddConcertModal = ({ isOpen, onClose }) => {

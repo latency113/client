@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import "react-toastify/dist/ReactToastify.css";
 import AddConcertModal from "./AddConcertModal";
 import EditConcertModal from "./EditConcertModal";
-import concertService from "../../../services/concert.service";
+import concertService from "../../../services/Concert.service";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
