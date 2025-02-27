@@ -28,7 +28,7 @@ const CheckoutComplete = () => {
   };
 
   if (status === "open") {
-    return (navigator.href = "/");
+    return (navigator.href = "https://conhub-iokd.onrender.com/");
   }
 
   return (
