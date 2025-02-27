@@ -136,7 +136,7 @@ const Navbar = () => {
                             <path d="M6 19v2" />
                             <rect x="2" y="8" width="20" height="13" rx="2" />
                           </svg>
-                          <p className="">ข่าวสาร</p>
+                          <p className="">เกี่ยวกับเรา</p>
                         </NavLink>
                       </li>
                     </ul>
