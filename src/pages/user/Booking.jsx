@@ -48,27 +48,8 @@ const ConcertBooking = () => {
           })
         );
 
-        // Grouping bookings by concert and date
-        const groupedBookings = {};
-        bookingsWithDetails.forEach((booking) => {
-          const concertId = booking.concertId;
-          const schedule = booking.concertDetails?.Schedule?.find(
-            (s) => s.id === booking.scheduleId
-          );
-          const dateKey = schedule
-            ? moment(schedule.date).format("YYYY-MM-DD")
-            : "unknown";
-
-          const key = `${concertId}-${dateKey}`;
-
-          if (!groupedBookings[key]) {
-            groupedBookings[key] = { ...booking, quantity: 1 };
-          } else {
-            groupedBookings[key].quantity += 1;
-          }
-        });
-
-        setBookings(Object.values(groupedBookings));
+        // Set the bookings directly without grouping
+        setBookings(bookingsWithDetails);
       } catch (error) {
         setError("Failed to load bookings. Please try again.");
         console.error(error);
