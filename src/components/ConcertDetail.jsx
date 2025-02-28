@@ -69,7 +69,7 @@ const ConcertDetail = () => {
   
       const bookingData = {
         concertId: id,
-        totalTickets,
+        totalTickets: parseInt(totalTickets),
         scheduleId: selectedSchedule,
       };
   
