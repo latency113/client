@@ -28,14 +28,14 @@ const ConcertBooking = () => {
         const userId = decodedPayload.id;
 
         const { data } = await axios.get(
-          `concert-yyqf.onrender.com/api/booking/user/${userId}`
+          `https://concert-yyqf.onrender.com/api/booking/user/${userId}`
         );
 
         const bookingsWithDetails = await Promise.all(
           data.bookings.map(async (booking) => {
             try {
               const concertResponse = await axios.get(
-                `concert-yyqf.onrender.com/api/concert/${booking.concertId}`
+                `https://concert-yyqf.onrender.com/api/concert/${booking.concertId}`
               );
               return {
                 ...booking,

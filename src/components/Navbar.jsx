@@ -14,7 +14,7 @@ const Navbar = () => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      fetch("concert-yyqf.onrender.com/api/user/profile", {
+      fetch("https://concert-yyqf.onrender.com/api/user/profile", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
