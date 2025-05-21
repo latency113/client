@@ -33,7 +33,7 @@ const getConcertById = async (id) => {
 const createBooking = async (bookingData, token) => {
   try {
     const response = await http.post(
-      "https://concert-production.up.railway.app/api/bookings",
+      "concert-yyqf.onrender.com/api/bookings",
       bookingData, // Send booking data in the body
       {
         headers: {
