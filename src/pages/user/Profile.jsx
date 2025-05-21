@@ -99,7 +99,7 @@ const Profile = () => {
 
     if (JSON.stringify(dataToUpdate) !== JSON.stringify(data.user)) {
       if (token && data) {
-        fetch(`https://concert-production.up.railway.app/api/user/profile/${data.user.id}`, {
+        fetch(`concert-yyqf.onrender.com/api/user/profile/${data.user.id}`, {
           method: "PUT",
           headers: {
             Authorization: `Bearer ${token}`,
