@@ -23,7 +23,7 @@ const ConcertDetail = () => {
 
   const callApi = async () => {
     try {
-      const res = await axios.get(`https://concert-production.up.railway.app/api/concert/${id}`);
+      const res = await axios.get(`https://concert-yyqf.onrender.com/api/concert/${id}`);
       setData(res.data.concert);
     } catch (error) {
       console.error("Error fetching concert details:", error);
