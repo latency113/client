@@ -21,7 +21,7 @@ const checkout = async (token, id) => {
 
 const checkoutstatus = async (token, session) => {
   try {
-    const response = await http.get(`concert-yyqf.onrender.com/api/user/checkout-status/${session}`, {
+    const response = await http.get(`https://concert-yyqf.onrender.com/api/user/checkout-status/${session}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
